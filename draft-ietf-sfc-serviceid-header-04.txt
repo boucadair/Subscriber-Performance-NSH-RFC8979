@@ -5,10 +5,10 @@
 SFC                                                          B. Sarikaya
 Internet-Draft                                       Denpel Informatique
 Intended status: Standards Track                             D. von Hugo
-Expires: May 2, 2020                                    Deutsche Telekom
+Expires: June 15, 2020                                  Deutsche Telekom
                                                             M. Boucadair
                                                                   Orange
-                                                        October 30, 2019
+                                                       December 13, 2019
 
 
       Service Function Chaining: Subscriber and Performance Policy
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 2, 2020.
+   This Internet-Draft will expire on June 15, 2020.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Sarikaya, et al.           Expires May 2, 2020                  [Page 1]
+Sarikaya, et al.          Expires June 15, 2020                 [Page 1]
 
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
 
 
    (https://trustee.ietf.org/license-info) in effect on the date of
@@ -72,13 +72,13 @@ Table of Contents
    2.  Conventions and Terminology . . . . . . . . . . . . . . . . .   4
    3.  Subscriber Identification NSH Variable-Length Context Header    4
    4.  Performance Policy Identification NSH Variable-Length Context
-       Headers . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+       Headers . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   8
    8.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   8
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
      9.2.  Informative References  . . . . . . . . . . . . . . . . .   9
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Sarikaya, et al.           Expires May 2, 2020                  [Page 2]
+Sarikaya, et al.          Expires June 15, 2020                 [Page 2]
 
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
 
 
    SFs and SF Forwarders (SFFs) involved in a service chain have to
@@ -165,9 +165,9 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
 
 
 
-Sarikaya, et al.           Expires May 2, 2020                  [Page 3]
+Sarikaya, et al.          Expires June 15, 2020                 [Page 3]
 
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
 
 
 2.  Conventions and Terminology
@@ -200,7 +200,11 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
 
    o  Metadata Class: MUST be set to 0x0 [RFC8300].
 
-   o  Type: TBD1 (See Section 5)
+   o  Type: TBD1 (See Section 5).
+
+   o  U: Unassigned bit [RFC8300].
+
+   o  Length: Variable.
 
    o  Subscriber Identifier: Carries an opaque subscriber identifier.
 
@@ -214,17 +218,16 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    Also, the data to be injected in such header SHOULD be configured to
    nodes authorized to inject such headers.  Typically, a node can be
    instructed to insert such data following a type/set scheme (e.g.,
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 4]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
    node X should inject subscriber ID type Y).  Other schemes may be
    envisaged.
-
-
-
-
-
-Sarikaya, et al.           Expires May 2, 2020                  [Page 4]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
-
 
    Failures to inject such headers SHOULD be logged locally while a
    notification alarm MAY be sent to a Control Element.  The details of
@@ -268,20 +271,23 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    context header, that SF has to remove all subscriber identifier
    context TLVs.
 
+
+
+
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 5]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
 4.  Performance Policy Identification NSH Variable-Length Context
     Headers
 
    Dedicated service-specific performance identifier is defined to
    differentiate between services requiring specific treatment to
    exhibit a performance characterized by, e.g., ultra-low latency (ULL)
-
-
-
-Sarikaya, et al.           Expires May 2, 2020                  [Page 5]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
-
-
    or ultra-high reliability (UHR).  Other policies can be considered
    when instantiating a service function chain within an SFC-enabled
    domain.  They are conveyed in the Performance Policy Identifier
@@ -317,6 +323,21 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    the default behavior of the node is to discard the packet and send a
    notification alarm to a Control Element.
 
+
+
+
+
+
+
+
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 6]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
       |          Metadata Class       |      Type     |U|    Length   |
@@ -331,16 +352,13 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
 
    The description of the fields is as follows:
 
-
-
-Sarikaya, et al.           Expires May 2, 2020                  [Page 6]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
-
-
    o  Metadata Class: MUST be set to 0x0 [RFC8300].
 
-   o  Type: TBD2 (See Section 5)
+   o  Type: TBD2 (See Section 5).
+
+   o  U: Unassigned bit [RFC8300].
+
+   o  Length: Variable.
 
    o  Performance Policy Identifier: Represents an opaque value pointing
       to specific performance policy to be enforced.  The structure and
@@ -368,6 +386,14 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
 
    Nodes that are involved in an SFC-enabled domain are assumed to be
    trusted ([RFC8300]).  Means to check that only authorized nodes are
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 7]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
    solicited when a packet is crossing an SFC-enabled domain are out of
    scope of this document.
 
@@ -383,17 +409,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    in NSH packets if the SF does not use the content of that header for
    its operation.
 
-
-
-
-
-
-
-Sarikaya, et al.           Expires May 2, 2020                  [Page 7]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
-
-
 7.  Acknowledgements
 
    Comments from Joel Halpern on a previous version and by Carlos
@@ -402,6 +417,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    Contributions and review by Christian Jacquenet, Danny Lachos,
    Debashish Purkayastha, Christian Esteve Rothenberg, and Kyle Larose
    are thankfully acknowledged.
+
+   Thanks to Donald Eastlake for the comments.
 
 8.  Change Log
 
@@ -423,6 +440,16 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
       that this is a generic concerns for all TLVs.  No change is thus
       added to the document.
 
+
+
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 8]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
 9.  References
 
 9.1.  Normative References
@@ -440,15 +467,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
-
-
-
-
-
-Sarikaya, et al.           Expires May 2, 2020                  [Page 8]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs     October 2019
-
 
    [RFC8300]  Quinn, P., Ed., Elzur, U., Ed., and C. Pignataro, Ed.,
               "Network Service Header (NSH)", RFC 8300,
@@ -481,6 +499,13 @@ Authors' Addresses
    Email: sarikaya@ieee.org
 
 
+
+
+Sarikaya, et al.          Expires June 15, 2020                 [Page 9]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    December 2019
+
+
    Dirk von Hugo
    Deutsche Telekom
    T-Online-Allee 1
@@ -501,4 +526,35 @@ Authors' Addresses
 
 
 
-Sarikaya, et al.           Expires May 2, 2020                  [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sarikaya, et al.          Expires June 15, 2020                [Page 10]

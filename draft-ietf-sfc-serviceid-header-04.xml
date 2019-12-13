@@ -199,7 +199,11 @@
           <t>Metadata Class: MUST be set to 0x0 <xref
           target="RFC8300"></xref>.</t>
 
-          <t>Type: TBD1 (See <xref target="IANA"></xref>)</t>
+          <t>Type: TBD1 (See <xref target="IANA"></xref>).</t>
+
+          <t>U: Unassigned bit <xref target="RFC8300"></xref>.</t>
+
+          <t>Length: Variable.</t>
 
           <t>Subscriber Identifier: Carries an opaque subscriber
           identifier.</t>
@@ -318,7 +322,11 @@
           <t>Metadata Class: MUST be set to 0x0 <xref
           target="RFC8300"></xref>.</t>
 
-          <t>Type: TBD2 (See <xref target="IANA"></xref>)</t>
+          <t>Type: TBD2 (See <xref target="IANA"></xref>).</t>
+
+          <t>U: Unassigned bit <xref target="RFC8300"></xref>.</t>
+
+          <t>Length: Variable.</t>
 
           <t>Performance Policy Identifier: Represents an opaque value
           pointing to specific performance policy to be enforced. The
@@ -384,12 +392,13 @@
       <t>Contributions and review by Christian Jacquenet, Danny Lachos,
       Debashish Purkayastha, Christian Esteve Rothenberg, and Kyle Larose are
       thankfully acknowledged.</t>
+
+      <t>Thanks to Donald Eastlake for the comments. </t>
     </section>
 
     <section anchor="log" title="Change Log">
-    <t>
-    Note. This section will be removed after WG last call.
-    </t>
+      <t>Note. This section will be removed after WG last call.</t>
+
       <t><list style="symbols">
           <t>submitted version -00 as a working group draft after adoption</t>
 
@@ -404,7 +413,7 @@
           there was a question whether the authors should investigate a
           solution specific to this I-D o cover integrity protection, but this
           seems not the good option given that this is a generic concerns for
-          all TLVs. No change is thus added to the document. </t>
+          all TLVs. No change is thus added to the document.</t>
         </list></t>
     </section>
   </middle>
