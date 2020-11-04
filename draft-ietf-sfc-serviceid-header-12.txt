@@ -129,7 +129,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    traversal within an SFC-enabled mobile network domain.  Furthermore,
    some SFs that are not enabled on the PGW/UPF may require a subscriber
    identifier to properly operate (see, for example, those listed in
-   [RFC8371]).  It is out of the scope of this document to include a
+   [RFC8371]).  It is outside the scope of this document to include a
    comprehensive list of deployments which may make use of the Context
    Headers defined in the document.
 
@@ -139,8 +139,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    these identifiers are carried in distinct Context Headers rather than
    multiplexing them in one single Context Header.  This approach avoids
    a requirement for additional internal structure in the Context
-   Headers to decide unambiguously whether an identifier refers to a
-   subscriber or to a policy.
+   Headers to specify whether an identifier refers to a subscriber or to
+   a policy.
 
    This document does not make any assumption about the structure of
    subscriber or performance policy identifiers; each such identifier is
@@ -152,16 +152,16 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    The reader may refer to Section 5 of [RFC8300] for MTU
    considerations.  Such considerations are not reiterated here.
 
-   This document assumes the NSH is used exclusively within a single
-   administrative domain.
-
    This document adheres to the SFC data plane architecture defined in
    [RFC7665].  This document assumes the reader is familiar with
    [RFC8300].
 
-
-
-
+   This document assumes the NSH is used exclusively within a single
+   administrative domain.  This document adheres to the recommendations
+   in [RFC8300] for handling the Context Headers at both ingress and
+   egress SFC boundary nodes (i.e., to strip the entire NSH, including
+   Context Headers).  Revealing any personal and subscriber-related
+   information to parties outside the SFC-enabled domain is avoided by
 
 
 
@@ -169,6 +169,10 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 3]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   design.  Accordingly, the scope for privacy breaches and user
+   tracking is limited to within the SFC-enabled domain where the NSH is
+   used.
 
 2.  Conventions and Terminology
 
@@ -213,11 +217,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    o  Subscriber Identifier: Carries an opaque subscriber identifier.
 
-   The Subscriber Identifier Context Header is used to convey an
-   identifier assigned by the service provider to uniquely identify a
-   subscriber.  This subscriber identifier can be used by service
-   functions to enforce per-subscriber policies (e.g., apply resource
-   quota).
+
 
 
 
@@ -225,6 +225,12 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 4]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   The Subscriber Identifier Context Header is used to convey an
+   identifier assigned by the service provider to uniquely identify a
+   subscriber.  This subscriber identifier can be used by service
+   functions to enforce per-subscriber policies (e.g., apply resource
+   quota).
 
    The classifier and NSH-aware SFs MAY inject or strip a Subscriber
    Identifier Context Header as a function of a local policy.  In order
@@ -242,14 +248,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    of the information in the Context Header.  Parameters for sending
    alarms, such as frequency, thresholds, and content of the alarm,
    should be configurable.
-
-   This document adheres to the recommendations in [RFC8300] for
-   handling the Context Headers at both ingress and egress SFC boundary
-   nodes (i.e., to strip the entire NSH, including such Context
-   Headers).  Revealing any personal and subscriber-related information
-   to parties outside the SFC-enabled domain is avoided by design.
-   Accordingly, the scope for privacy breaches and user tracking is
-   limited to within the SFC-enabled domain where the NSH is used.
 
    Intermediary NSH-aware nodes have to preserve Subscriber Identifier
    Context Headers (i.e., the information can be passed to next hop NSH-
@@ -274,6 +272,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Subscriber Identifier Context Headers conveying Mobile Subscriber
    ISDN Number (MSISDN), International Mobile Subscriber Identity
    (IMSI), or malformed IP addresses.
+
+
 
 
 

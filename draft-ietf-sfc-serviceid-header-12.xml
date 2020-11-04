@@ -138,7 +138,7 @@
       an SFC-enabled mobile network domain. Furthermore, some SFs that are not
       enabled on the PGW/UPF may require a subscriber identifier to properly
       operate (see, for example, those listed in <xref
-      target="RFC8371"></xref>). It is out of the scope of this document to
+      target="RFC8371"></xref>). It is outside the scope of this document to
       include a comprehensive list of deployments which may make use of the
       Context Headers defined in the document.</t>
 
@@ -148,8 +148,7 @@
       identifiers are carried in distinct Context Headers rather than
       multiplexing them in one single Context Header. This approach avoids a
       requirement for additional internal structure in the Context Headers to
-      decide unambiguously whether an identifier refers to a subscriber or to
-      a policy.</t>
+      specify whether an identifier refers to a subscriber or to a policy.</t>
 
       <t>This document does not make any assumption about the structure of
       subscriber or performance policy identifiers; each such identifier is
@@ -161,12 +160,19 @@
       <t>The reader may refer to Section 5 of <xref target="RFC8300"></xref>
       for MTU considerations. Such considerations are not reiterated here.</t>
 
-      <t>This document assumes the NSH is used exclusively within a single
-      administrative domain.</t>
-
       <t>This document adheres to the SFC data plane architecture defined in
       <xref target="RFC7665"></xref>. This document assumes the reader is
       familiar with <xref target="RFC8300"></xref>.</t>
+
+      <t>This document assumes the NSH is used exclusively within a single
+      administrative domain. This document adheres to the recommendations in
+      <xref target="RFC8300"></xref> for handling the Context Headers at both
+      ingress and egress SFC boundary nodes (i.e., to strip the entire NSH,
+      including Context Headers). Revealing any personal and
+      subscriber-related information to parties outside the SFC-enabled domain
+      is avoided by design. Accordingly, the scope for privacy breaches and
+      user tracking is limited to within the SFC-enabled domain where the NSH
+      is used. </t>
     </section>
 
     <section title="Conventions and Terminology">
@@ -241,15 +247,6 @@
       the information in the Context Header. Parameters for sending alarms,
       such as frequency, thresholds, and content of the alarm, should be
       configurable.</t>
-
-      <t>This document adheres to the recommendations in <xref
-      target="RFC8300"></xref> for handling the Context Headers at both
-      ingress and egress SFC boundary nodes (i.e., to strip the entire NSH,
-      including such Context Headers). Revealing any personal and
-      subscriber-related information to parties outside the SFC-enabled domain
-      is avoided by design. Accordingly, the scope for privacy breaches and
-      user tracking is limited to within the SFC-enabled domain where the NSH
-      is used. </t>
 
       <t>Intermediary NSH-aware nodes have to preserve Subscriber Identifier
       Context Headers (i.e., the information can be passed to next hop
