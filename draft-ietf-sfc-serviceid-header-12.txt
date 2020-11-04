@@ -322,7 +322,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    criteria for instantiating specific SFs include location,
    performance, or proximity considerations.  For the particular case of
    UHR services, the stand-by operation of back-up capacity or the
-   deployment of multiple SF instances may be requested.
+   presence of SFs deployed in multiple instances may be requested.
 
    In an environment characterised by frequent changes of link and path
    behaviour, for example due to variable load or availability caused by
