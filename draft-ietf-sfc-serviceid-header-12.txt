@@ -19,12 +19,12 @@ Expires: May 8, 2021                                    Deutsche Telekom
 Abstract
 
    This document defines two Variable-Length Context Headers that can be
-   carried in Network Service Header: Subscriber and Performance Policy
-   Identifiers.  These Context Headers are used to inform Service
-   Functions about subscriber- and performance-related information for
-   the sake of policy enforcement and appropriate service function
-   chaining operations.  The structure of each Context Header, their use
-   and processing by NSH-aware nodes are described.
+   carried in the Network Service Header: the Subscriber and Performance
+   Policy Identifiers.  These Context Headers are used to inform Service
+   Functions of subscriber- and performance-related information for the
+   sake of policy enforcement and appropriate service function chaining
+   operations.  The structure of each Context Header, and their use and
+   processing by NSH-aware nodes, are described.
 
 Status of This Memo
 
@@ -73,7 +73,7 @@ Table of Contents
    3.  Subscriber Identification NSH Variable-Length Context Header    4
    4.  Performance Policy Identification NSH Variable-Length Context
        Headers . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
@@ -85,8 +85,8 @@ Table of Contents
 
    This document discusses how to inform Service Functions (SFs)
    [RFC7665] about subscriber and service policy information, when
-   required, for the sake of policy enforcement within a single
-   administrative domain.  Particularly, subscriber-related information
+   required for the sake of policy enforcement within a single
+   administrative domain.  In particular, subscriber-related information
    may be required to enforce subscriber-specific SFC-based traffic
    policies.  However, the information carried in packets may not be
    sufficient to unambiguously identify a subscriber.  This document
@@ -101,10 +101,10 @@ Table of Contents
    dynamic structuring of service function chains and their subsequent
    SFPs may be conditioned by QoS requirements that will affect SF
    instance(s) identification, location, and sequencing.  Hence, the
-   need to supply a performance policy identifier to downstream SFs to
-   appropriately meet the service requirements arises.  This information
-   is proposed to be included as a Context Header in the NSH
-   (Section 4).
+   need arises to provide downstream SFs with a performance policy
+   identifier in order for them to appropriately meet the QoS service
+   requirements.  This document also specifies a new NSH Context Header
+   (Section 4) to convey such policy identifiers.
 
 
 
@@ -118,34 +118,34 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    the context of mobile networks (particularly, in the 3GPP defined
    (S)Gi Interface) [I-D.ietf-sfc-use-case-mobility].  Typically,
    because of the widespread use of private IPv4 addresses in those
-   networks, if SFs to be invoked are located after a NAT function, the
-   identification based on the internal IPv4 address is not possible
+   networks, if the SFs to be invoked are located after a NAT function,
+   the identification based on the internal IPv4 address is not possible
    once the NAT has been crossed.  NAT functionality can reside in a
    distinct node.  For a 4G 3GPP network, that node can be the Packet
    Data Network (PDN) Gateway (PGW) as specified in [TS23401].  For a 5G
    3GPP network, it can be the User Plane Function (UPF) facing the
-   external Data Network (DN) [TS23501].  As such, means to allow
-   passing the internal information may optimise packet traversal within
-   an SFC-enabled mobile network domain.  Furthermore, some SFs that are
-   not enabled on the PGW/UPF may require a subscriber identifier to
-   properly operate (see, for example, those listed in [RFC8371]).  It
-   is out of the scope of this document to include a comprehensive list
-   of deployments which may make use of the Context Headers defined in
-   the document.
+   external Data Network (DN) [TS23501].  As such, a mechanism to pass
+   the internal information past the NAT boundary may optimise packet
+   traversal within an SFC-enabled mobile network domain.  Furthermore,
+   some SFs that are not enabled on the PGW/UPF may require a subscriber
+   identifier to properly operate (see, for example, those listed in
+   [RFC8371]).  It is out of the scope of this document to include a
+   comprehensive list of deployments which may make use of the Context
+   Headers defined in the document.
 
-   Since subscribers identifiers are distinct from those used to
-   identify a performance policy and given that multiple policies may be
+   Since subscriber identifiers are distinct from those used to identify
+   a performance policy and given that multiple policies may be
    associated with a single subscriber within a service function chain,
    these identifiers are carried in distinct Context Headers rather than
    multiplexing them in one single Context Header.  This approach avoids
-   the requirement of an additional internal structures of the Context
+   a requirement for additional internal structure in the Context
    Headers to decide unambiguously whether an identifier refers to a
    subscriber or to a policy.
 
    This document does not make any assumption about the structure of
    subscriber or performance policy identifiers; each such identifier is
    treated as an opaque value.  The semantics and validation of these
-   identifiers are policies local to an SFC-enabled domain.  This
+   identifiers are policies local to each SFC-enabled domain.  This
    document focuses on the data plane behaviour.  Control plane
    considerations are out of the scope.
 
@@ -238,15 +238,17 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Failures to inject such headers should be logged locally while a
    notification alarm may be sent to a Control Element.  The details of
    sending notification alarms (i.e., the parameters affecting the
-   transmission of the notification alarms depend on the information in
-   the Context Header such as frequency, thresholds, and content of the
-   alarm (full header, timestamp, etc.)) should be configurable.
+   transmission of the notification alarms) might depend on the nature
+   of the information in the Context Header.  Parameters for sending
+   alarms, such as frequency, thresholds, and content of the alarm,
+   should be configurable.
 
    This document adheres to the recommendations in [RFC8300] for
    handling the Context Headers at both ingress and egress SFC boundary
-   nodes (i.e., to strip such Context Headers).  Revealing any personal
-   and subscriber-related information to third parties is avoided by
-   design to prevent privacy breaches in terms of user tracking.
+   nodes (i.e., to strip the entire NSH, including such Context
+   Headers).  Revealing any personal and subscriber-related information
+   to third parties is avoided by design to prevent privacy breaches in
+   terms of user tracking.
 
    Intermediary NSH-aware nodes have to preserve Subscriber Identifier
    Context Headers (i.e., the information can be passed to next hop NSH-
@@ -272,8 +274,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    ISDN Number (MSISDN), International Mobile Subscriber Identity
    (IMSI), or malformed IP addresses.
 
-   Multiple Subscriber Identifier Context Headers MAY be present in the
-   NSH, each carrying a distinct opaque value but all pointing to the
 
 
 
@@ -282,6 +282,8 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 5]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+   Multiple Subscriber Identifier Context Headers MAY be present in the
+   NSH, each carrying a distinct opaque value but all pointing to the
    same subscriber.  This may be required, e.g., by policy enforcement
    mechanisms in a mobile network where some SFs rely on IP addresses as
    subscriber Identifiers, while others use non-IP specific identifiers
@@ -328,8 +330,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    adapted dynamically by on-the-move SFC path and SF instance
    selection.
 
-   Performance Policy Identifier is defined as an optional variable
-   length Context Header.  Its structure is shown in Figure 2.
 
 
 
@@ -337,6 +337,9 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 6]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   Performance Policy Identifier is defined as an optional variable
+   length Context Header.  Its structure is shown in Figure 2.
 
    Intermediary NSH-aware nodes have to preserve such Context Headers
    (i.e., the information can be passed to next hop NSH-aware nodes),
@@ -380,11 +383,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
       to specific performance policy to be enforced.  The structure and
       semantics of this field are deployment-specific.
 
-5.  IANA Considerations
 
-   This document requests IANA to assign the following types from the
-   "NSH IETF- Assigned Optional Variable-Length Metadata Types" (0x0000
-   IETF Base NSH MD Class) registry available at:
+
 
 
 
@@ -394,6 +394,11 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 7]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+5.  IANA Considerations
+
+   This document requests IANA to assign the following types from the
+   "NSH IETF- Assigned Optional Variable-Length Metadata Types" (0x0000
+   IETF Base NSH MD Class) registry available at:
    https://www.iana.org/assignments/nsh/nsh.xhtml#optional-variable-
    length-metadata-types.
 
@@ -437,11 +442,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    of a Subscriber and Performance Policy Context Headers unless the SF
    actually uses the content of these headers for its operation.  A
    mechanism for encrypting sensitive NSH data is specified in
-   [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
-   network operators when enhanced SF-to-SF security protection of NSH
-   metadata is required.
-
-
 
 
 
@@ -449,6 +449,10 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 8]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
+   network operators when enhanced SF-to-SF security protection of NSH
+   metadata is required.
 
 7.  Acknowledgements
 
@@ -462,7 +466,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    Many thanks to Robert Sparks for the secdir review.
 
-   Thanks to Barry Leiba, EriK Kline, and Benjamin Kaduk for the IESG
+   Thanks to Barry Leiba, Erik Kline, and Benjamin Kaduk for the IESG
    review.
 
 8.  References
@@ -490,11 +494,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 8.2.  Informative References
 
-   [I-D.ietf-sfc-nsh-integrity]
-              Boucadair, M., Reddy.K, T., and D. Wing, "Integrity
-              Protection for the Network Service Header (NSH) and
-              Encryption of Sensitive Context Headers", draft-ietf-sfc-
-              nsh-integrity-00 (work in progress), June 2020.
+
 
 
 
@@ -505,6 +505,12 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 9]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   [I-D.ietf-sfc-nsh-integrity]
+              Boucadair, M., Reddy.K, T., and D. Wing, "Integrity
+              Protection for the Network Service Header (NSH) and
+              Encryption of Sensitive Context Headers", draft-ietf-sfc-
+              nsh-integrity-00 (work in progress), June 2020.
 
    [I-D.ietf-sfc-use-case-mobility]
               Haeffner, W., Napper, J., Stiemerling, M., Lopez, D., and
@@ -544,6 +550,18 @@ Authors' Addresses
    Email: Dirk.von-Hugo@telekom.de
 
 
+
+
+
+
+
+
+
+Sarikaya, et al.           Expires May 8, 2021                 [Page 10]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    Mohamed Boucadair
    Orange
    Rennes 3500
@@ -557,4 +575,42 @@ Authors' Addresses
 
 
 
-Sarikaya, et al.           Expires May 8, 2021                 [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sarikaya, et al.           Expires May 8, 2021                 [Page 11]
