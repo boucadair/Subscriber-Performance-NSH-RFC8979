@@ -78,7 +78,7 @@ Table of Contents
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .   9
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
@@ -247,8 +247,9 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    handling the Context Headers at both ingress and egress SFC boundary
    nodes (i.e., to strip the entire NSH, including such Context
    Headers).  Revealing any personal and subscriber-related information
-   to third parties is avoided by design to prevent privacy breaches in
-   terms of user tracking.
+   to parties outside the SFC-enabled domain is avoided by design.
+   Accordingly, the scope for privacy breaches and user tracking is
+   limited to within the SFC-enabled domain where the NSH is used.
 
    Intermediary NSH-aware nodes have to preserve Subscriber Identifier
    Context Headers (i.e., the information can be passed to next hop NSH-
@@ -273,7 +274,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Subscriber Identifier Context Headers conveying Mobile Subscriber
    ISDN Number (MSISDN), International Mobile Subscriber Identity
    (IMSI), or malformed IP addresses.
-
 
 
 
@@ -426,22 +426,22 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    discussed in [RFC8300] are to be followed.  A mechanism for NSH
    integrity is specified in [I-D.ietf-sfc-nsh-integrity].
 
+   The presence of multiple Subscriber Identifier Context Headers in the
+   same NSH allows a misbehaving node from within the SFC-enabled domain
+   to bind these identifiers to the same subscriber.  This can be used
+   to track that subscriber more effectively.  If encryption is not
+   enabled, the use of non persistent identifiers as well as the removal
+   of the Subscriber Identifier Context Headers from the NSH by the last
+   SF making use of such header soften this issue.
+
    Both Subscriber Identifier and Performance Policy Context Headers
    carry opaque data.  The structure of the identifiers conveyed in
    these Context Headers is communicated only to entitled NSH-aware
    nodes.  Nevertheless, some structures may be easily inferred from the
-   headers (e.g., use of IP addresses).  The use of trivial subscriber
+   headers (e.g., IP addresses).  The use of trivial subscriber
    identifier structures together with the presence of specific SFs in a
    service function chain (e.g., lawful intercept SF) reveal sensitive
    information to every on-path device (but also to teams managing these
-   devices).  Such disclosure is a violation in many jurisdictions
-   because such information should be available to very few network
-   operator personnel.  Furthermore, access to subscriber data usually
-   requires specific access privilege levels.  To maintain that
-   protection, an SF keeping operational logs should not log the content
-   of a Subscriber and Performance Policy Context Headers unless the SF
-   actually uses the content of these headers for its operation.  A
-   mechanism for encrypting sensitive NSH data is specified in
 
 
 
@@ -450,9 +450,22 @@ Sarikaya, et al.           Expires May 8, 2021                  [Page 8]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
-   [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
-   network operators when enhanced SF-to-SF security protection of NSH
-   metadata is required.
+   devices).  Such disclosure is a violation in many jurisdictions
+   because such information should be available to very few network
+   operator personnel.  Furthermore, access to subscriber data usually
+   requires specific access privilege levels.  To maintain that
+   protection, an SF keeping operational logs should not log the content
+   of a Subscriber and Performance Policy Context Headers unless the SF
+   actually uses the content of these headers for its operation.  As
+   discussed in Section 8.2.2 of [RFC8300], subscriber-identifying
+   information should be obfuscated.  Also, a mechanism for encrypting
+   sensitive NSH data is specified in [I-D.ietf-sfc-nsh-integrity].
+   This mechanism can be considered by network operators when enhanced
+   SF-to-SF security protection of NSH metadata is required.
+
+   Some events are logged locally with notification alerts sent by NSH-
+   aware nodes to a Control Element.  These events SHOULD be rate
+   limited.
 
 7.  Acknowledgements
 
@@ -483,6 +496,16 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               DOI 10.17487/RFC7665, October 2015,
               <https://www.rfc-editor.org/info/rfc7665>.
 
+
+
+
+
+
+Sarikaya, et al.           Expires May 8, 2021                  [Page 9]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
@@ -493,18 +516,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               <https://www.rfc-editor.org/info/rfc8300>.
 
 8.2.  Informative References
-
-
-
-
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 9]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
    [I-D.ietf-sfc-nsh-integrity]
               Boucadair, M., Reddy.K, T., and D. Wing, "Integrity
@@ -521,11 +532,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    [RFC8371]  Perkins, C. and V. Devarapalli, "Mobile Node Identifier
               Types for MIPv6", RFC 8371, DOI 10.17487/RFC8371, July
               2018, <https://www.rfc-editor.org/info/rfc8371>.
-
-   [RFC8459]  Dolson, D., Homma, S., Lopez, D., and M. Boucadair,
-              "Hierarchical Service Function Chaining (hSFC)", RFC 8459,
-              DOI 10.17487/RFC8459, September 2018,
-              <https://www.rfc-editor.org/info/rfc8459>.
 
    [TS23401]  3GPP 23.401 16.5.0, "General Packet Radio Service (GPRS)
               enhancements for Evolved Universal Terrestrial Radio
@@ -548,12 +554,6 @@ Authors' Addresses
    Germany
 
    Email: Dirk.von-Hugo@telekom.de
-
-
-
-
-
-
 
 
 

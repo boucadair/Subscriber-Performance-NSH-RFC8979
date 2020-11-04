@@ -246,8 +246,10 @@
       target="RFC8300"></xref> for handling the Context Headers at both
       ingress and egress SFC boundary nodes (i.e., to strip the entire NSH,
       including such Context Headers). Revealing any personal and
-      subscriber-related information to third parties is avoided by design to
-      prevent privacy breaches in terms of user tracking.</t>
+      subscriber-related information to parties outside the SFC-enabled domain
+      is avoided by design. Accordingly, the scope for privacy breaches and
+      user tracking is limited to within the SFC-enabled domain where the NSH
+      is used. </t>
 
       <t>Intermediary NSH-aware nodes have to preserve Subscriber Identifier
       Context Headers (i.e., the information can be passed to next hop
@@ -416,11 +418,19 @@
       integrity is specified in <xref
       target="I-D.ietf-sfc-nsh-integrity"></xref>.</t>
 
+      <t>The presence of multiple Subscriber Identifier Context Headers in the
+      same NSH allows a misbehaving node from within the SFC-enabled domain to
+      bind these identifiers to the same subscriber. This can be used to track
+      that subscriber more effectively. If encryption is not enabled, the use
+      of non persistent identifiers as well as the removal of the Subscriber
+      Identifier Context Headers from the NSH by the last SF making use of
+      such header soften this issue. </t>
+
       <t>Both Subscriber Identifier and Performance Policy Context Headers
       carry opaque data. The structure of the identifiers conveyed in these
       Context Headers is communicated only to entitled NSH-aware nodes.
       Nevertheless, some structures may be easily inferred from the headers
-      (e.g., use of IP addresses). The use of trivial subscriber identifier
+      (e.g., IP addresses). The use of trivial subscriber identifier
       structures together with the presence of specific SFs in a service
       function chain (e.g., lawful intercept SF) reveal sensitive information
       to every on-path device (but also to teams managing these devices). Such
@@ -430,10 +440,16 @@
       levels. To maintain that protection, an SF keeping operational logs
       should not log the content of a Subscriber and Performance Policy
       Context Headers unless the SF actually uses the content of these headers
-      for its operation. A mechanism for encrypting sensitive NSH data is
+      for its operation. As discussed in Section 8.2.2 of <xref
+      target="RFC8300"></xref>, subscriber-identifying information should be
+      obfuscated. Also, a mechanism for encrypting sensitive NSH data is
       specified in <xref target="I-D.ietf-sfc-nsh-integrity"></xref>. This
       mechanism can be considered by network operators when enhanced SF-to-SF
       security protection of NSH metadata is required.</t>
+
+      <t>Some events are logged locally with notification alerts sent by
+      NSH-aware nodes to a Control Element. These events SHOULD be rate
+      limited.</t>
     </section>
 
     <section title="Acknowledgements">
@@ -464,8 +480,6 @@
     </references>
 
     <references title="Informative References">
-      <?rfc include='reference.RFC.8459'?>
-
       <?rfc include='reference.RFC.8371'?>
 
       <?rfc include='reference.I-D.ietf-sfc-use-case-mobility'?>
