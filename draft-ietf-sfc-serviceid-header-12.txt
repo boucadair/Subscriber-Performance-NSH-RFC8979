@@ -479,8 +479,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    Many thanks to Robert Sparks for the secdir review.
 
-   Thanks to Barry Leiba, Erik Kline, and Eric Vyncke for the IESG
-   review.  Special thanks to Ben for the careful review and
+   Thanks to Barry Leiba, Erik Kline, Eric Vyncke, and Robert Wilton for
+   the IESG review.  Special thanks to Ben for the careful review and
    suggestionns that enhanced this specification.
 
 8.  References
