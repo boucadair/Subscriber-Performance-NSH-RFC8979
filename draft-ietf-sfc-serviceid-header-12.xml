@@ -424,7 +424,7 @@
       that subscriber more effectively. If encryption is not enabled, the use
       of non persistent identifiers as well as the removal of the Subscriber
       Identifier Context Headers from the NSH by the last SF making use of
-      such header soften this issue. </t>
+      such headers soften this issue. </t>
 
       <t>Both Subscriber Identifier and Performance Policy Context Headers
       carry opaque data. The structure of the identifiers conveyed in these
@@ -464,7 +464,8 @@
       <t>Many thanks to Robert Sparks for the secdir review.</t>
 
       <t>Thanks to Barry Leiba, Erik Kline, and Eric Vyncke for the IESG
-      review. Special thanks to Ben for the careful review.</t>
+      review. Special thanks to Ben for the careful review and suggestionns
+      that enhanced this specification.</t>
     </section>
   </middle>
 

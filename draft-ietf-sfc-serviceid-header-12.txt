@@ -432,7 +432,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    to track that subscriber more effectively.  If encryption is not
    enabled, the use of non persistent identifiers as well as the removal
    of the Subscriber Identifier Context Headers from the NSH by the last
-   SF making use of such header soften this issue.
+   SF making use of such headers soften this issue.
 
    Both Subscriber Identifier and Performance Policy Context Headers
    carry opaque data.  The structure of the identifiers conveyed in
@@ -480,7 +480,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Many thanks to Robert Sparks for the secdir review.
 
    Thanks to Barry Leiba, Erik Kline, and Eric Vyncke for the IESG
-   review.  Special thanks to Ben for the careful review.
+   review.  Special thanks to Ben for the careful review and
+   suggestionns that enhanced this specification.
 
 8.  References
 
@@ -495,7 +496,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               Chaining (SFC) Architecture", RFC 7665,
               DOI 10.17487/RFC7665, October 2015,
               <https://www.rfc-editor.org/info/rfc7665>.
-
 
 
 
