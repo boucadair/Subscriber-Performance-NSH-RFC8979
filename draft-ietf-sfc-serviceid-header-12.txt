@@ -422,9 +422,9 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    are discussed in [RFC7665] and [RFC8300].
 
    Nodes that are involved in an SFC-enabled domain are assumed to be
-   trusted ([RFC8300]).  Means to check that only authorized nodes are
-   solicited when a packet is crossing an SFC-enabled domain are out of
-   scope of this document.
+   trusted (Section 1.1 of [RFC8300]).  Means to check that only
+   authorized nodes are solicited when a packet is crossing an SFC-
+   enabled domain are out of scope of this document.
 
    A misbehaving node from within the SFC-enabled domain may alter the
    content of Subscriber Identifier and Performance Policy Context

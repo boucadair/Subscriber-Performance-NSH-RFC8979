@@ -412,9 +412,9 @@
       target="RFC8300"></xref>.</t>
 
       <t>Nodes that are involved in an SFC-enabled domain are assumed to be
-      trusted (<xref target="RFC8300"></xref>). Means to check that only
-      authorized nodes are solicited when a packet is crossing an SFC-enabled
-      domain are out of scope of this document.</t>
+      trusted (Section 1.1 of <xref target="RFC8300"> </xref>). Means to check
+      that only authorized nodes are solicited when a packet is crossing an
+      SFC-enabled domain are out of scope of this document.</t>
 
       <t>A misbehaving node from within the SFC-enabled domain may alter the
       content of Subscriber Identifier and Performance Policy Context Headers
