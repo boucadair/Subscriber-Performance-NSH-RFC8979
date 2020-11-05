@@ -447,10 +447,11 @@
       Context Headers unless the SF actually uses the content of these headers
       for its operation. As discussed in Section 8.2.2 of <xref
       target="RFC8300"></xref>, subscriber-identifying information should be
-      obfuscated. Also, a mechanism for encrypting sensitive NSH data is
-      specified in <xref target="I-D.ietf-sfc-nsh-integrity"></xref>. This
-      mechanism can be considered by network operators when enhanced SF-to-SF
-      security protection of NSH metadata is required.</t>
+      obfuscated and security features in the transport encapsulation protocol
+      (such as IPsec) must be used. A mechanism for encrypting sensitive NSH
+      data is specified in <xref target="I-D.ietf-sfc-nsh-integrity"></xref>.
+      This mechanism can be considered by network operators when enhanced
+      SF-to-SF security protection of NSH metadata is required. </t>
 
       <t>Some events are logged locally with notification alerts sent by
       NSH-aware nodes to a Control Element. These events SHOULD be rate

@@ -77,7 +77,7 @@ Table of Contents
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
@@ -466,10 +466,12 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    of a Subscriber and Performance Policy Context Headers unless the SF
    actually uses the content of these headers for its operation.  As
    discussed in Section 8.2.2 of [RFC8300], subscriber-identifying
-   information should be obfuscated.  Also, a mechanism for encrypting
-   sensitive NSH data is specified in [I-D.ietf-sfc-nsh-integrity].
-   This mechanism can be considered by network operators when enhanced
-   SF-to-SF security protection of NSH metadata is required.
+   information should be obfuscated and security features in the
+   transport encapsulation protocol (such as IPsec) must be used.  A
+   mechanism for encrypting sensitive NSH data is specified in
+   [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
+   network operators when enhanced SF-to-SF security protection of NSH
+   metadata is required.
 
    Some events are logged locally with notification alerts sent by NSH-
    aware nodes to a Control Element.  These events SHOULD be rate
@@ -493,8 +495,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 8.  References
 
-8.1.  Normative References
-
 
 
 
@@ -505,6 +505,8 @@ Sarikaya, et al.           Expires May 9, 2021                  [Page 9]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -549,8 +551,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    [TS23501]  3GPP 23.501 16.3.0, "System architecture for the 5G System
               (5GS),", December 2019.
-
-
 
 
 
