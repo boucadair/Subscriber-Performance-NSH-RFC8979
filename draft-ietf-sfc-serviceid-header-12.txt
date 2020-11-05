@@ -454,24 +454,24 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    carry opaque data.  The structure of the identifiers conveyed in
    these Context Headers is communicated only to entitled NSH-aware
    nodes.  Nevertheless, some structures may be easily inferred from the
-   headers (e.g., IP addresses).  The use of trivial subscriber
-   identifier structures together with the presence of specific SFs in a
-   service function chain (e.g., lawful intercept SF) reveal sensitive
-   information to every on-path device (but also to teams managing these
-   devices).  Such disclosure is a violation in many jurisdictions
-   because such information should be available to very few network
-   operator personnel.  Furthermore, access to subscriber data usually
-   requires specific access privilege levels.  To maintain that
-   protection, an SF keeping operational logs should not log the content
-   of a Subscriber and Performance Policy Context Headers unless the SF
-   actually uses the content of these headers for its operation.  As
-   discussed in Section 8.2.2 of [RFC8300], subscriber-identifying
-   information should be obfuscated and security features in the
-   transport encapsulation protocol (such as IPsec) must be used.  A
-   mechanism for encrypting sensitive NSH data is specified in
-   [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
-   network operators when enhanced SF-to-SF security protection of NSH
-   metadata is required.
+   headers (e.g., IP addresses).  If no secure transport encapsulation
+   is enabled, the use of trivial subscriber identifier structures
+   together with the presence of specific SFs in a service function
+   chain may reveal sensitive information to every on-path device (but
+   also to teams managing these devices).  Such disclosure can be a
+   violation in many jurisdictions because such information should be
+   available to very few network operator personnel.  Furthermore,
+   access to subscriber data usually requires specific access privilege
+   levels.  To maintain that protection, an SF keeping operational logs
+   should not log the content of a Subscriber and Performance Policy
+   Context Headers unless the SF actually uses the content of these
+   headers for its operation.  As discussed in Section 8.2.2 of
+   [RFC8300], subscriber-identifying information should be obfuscated
+   and security features in the transport encapsulation protocol (such
+   as IPsec) must be used.  A mechanism for encrypting sensitive NSH
+   data is specified in [I-D.ietf-sfc-nsh-integrity].  This mechanism
+   can be considered by network operators when enhanced SF-to-SF
+   security protection of NSH metadata is required.
 
    Some events are logged locally with notification alerts sent by NSH-
    aware nodes to a Control Element.  These events SHOULD be rate
