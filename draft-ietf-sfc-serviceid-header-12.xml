@@ -172,7 +172,7 @@
       subscriber-related information to parties outside the SFC-enabled domain
       is avoided by design. Accordingly, the scope for privacy breaches and
       user tracking is limited to within the SFC-enabled domain where the NSH
-      is used. </t>
+      is used.</t>
     </section>
 
     <section title="Conventions and Terminology">
@@ -222,8 +222,16 @@
           <t>Length: Indicates the length of the Subscriber Identifier, in
           bytes (see Section 2.5.1 of <xref target="RFC8300"></xref>).</t>
 
-          <t>Subscriber Identifier: Carries an opaque subscriber
-          identifier.</t>
+          <t>Subscriber Identifier: Carries an opaque local subscriber
+          identifier that is assigned to a subscriber by a network
+          operator.<vspace blankLines="1" />For example, this identifier can
+          be generated from some of the information that is already conveyed
+          in the original packets from a host (e.g., internal IP address) or
+          other information that is collected from various sources within an
+          SFC-enabled domain (e.g., line identifier). The use of indirect and
+          non-persistent identification is RECOMMENDED.<vspace
+          blankLines="1" />Aligned with Section 8.2.2 of <xref
+          target="RFC8300"></xref>, this identifier SHOULD be obfuscated. </t>
         </list></t>
 
       <t>The Subscriber Identifier Context Header is used to convey an
@@ -421,7 +429,7 @@
       that subscriber more effectively. If encryption is not enabled, the use
       of non persistent identifiers as well as the removal of the Subscriber
       Identifier Context Headers from the NSH by the last SF making use of
-      such headers soften this issue. </t>
+      such headers soften this issue.</t>
 
       <t>Both Subscriber Identifier and Performance Policy Context Headers
       carry opaque data. The structure of the identifiers conveyed in these

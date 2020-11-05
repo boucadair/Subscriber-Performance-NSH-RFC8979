@@ -5,10 +5,10 @@
 SFC                                                          B. Sarikaya
 Internet-Draft
 Intended status: Standards Track                             D. von Hugo
-Expires: May 8, 2021                                    Deutsche Telekom
+Expires: May 9, 2021                                    Deutsche Telekom
                                                             M. Boucadair
                                                                   Orange
-                                                        November 4, 2020
+                                                        November 5, 2020
 
 
       Service Function Chaining: Subscriber and Performance Policy
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 8, 2021.
+   This Internet-Draft will expire on May 9, 2021.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Sarikaya, et al.           Expires May 8, 2021                  [Page 1]
+Sarikaya, et al.           Expires May 9, 2021                  [Page 1]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
@@ -79,7 +79,7 @@ Table of Contents
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   9
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Sarikaya, et al.           Expires May 8, 2021                  [Page 2]
+Sarikaya, et al.           Expires May 9, 2021                  [Page 2]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
@@ -165,7 +165,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
 
-Sarikaya, et al.           Expires May 8, 2021                  [Page 3]
+Sarikaya, et al.           Expires May 9, 2021                  [Page 3]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
@@ -215,16 +215,26 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    o  Length: Indicates the length of the Subscriber Identifier, in
       bytes (see Section 2.5.1 of [RFC8300]).
 
-   o  Subscriber Identifier: Carries an opaque subscriber identifier.
+   o  Subscriber Identifier: Carries an opaque local subscriber
+      identifier that is assigned to a subscriber by a network operator.
 
 
 
 
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 4]
+Sarikaya, et al.           Expires May 9, 2021                  [Page 4]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+      For example, this identifier can be generated from some of the
+      information that is already conveyed in the original packets from
+      a host (e.g., internal IP address) or other information that is
+      collected from various sources within an SFC-enabled domain (e.g.,
+      line identifier).  The use of indirect and non-persistent
+      identification is RECOMMENDED.
+
+      Aligned with Section 8.2.2 of [RFC8300], this identifier SHOULD be
+      obfuscated.
 
    The Subscriber Identifier Context Header is used to convey an
    identifier assigned by the service provider to uniquely identify a
@@ -264,6 +274,14 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    the behavior to follow by an NSH-aware SF if the validation checks
    fail (e.g., remove the Context Header from the packet).  These
    additional validation checks are deployment-specific.  If validation
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                  [Page 5]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    checks fail on a Subscriber Identifier Context Header, an NSH-aware
    SF MUST ignore that Context Header.  The event should be logged
    locally while a notification alarm may be sent to a Control Element
@@ -272,15 +290,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Subscriber Identifier Context Headers conveying Mobile Subscriber
    ISDN Number (MSISDN), International Mobile Subscriber Identity
    (IMSI), or malformed IP addresses.
-
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 5]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
    Multiple Subscriber Identifier Context Headers MAY be present in the
    NSH, each carrying a distinct opaque value but all pointing to the
@@ -321,6 +330,14 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    based upon the corresponding performance policy identifier.  Typical
    criteria for instantiating specific SFs include location,
    performance, or proximity considerations.  For the particular case of
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                  [Page 6]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    UHR services, the stand-by operation of back-up capacity or the
    presence of SFs deployed in multiple instances may be requested.
 
@@ -329,14 +346,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    propagation conditions on a wireless link, the SFP may have to be
    adapted dynamically by on-the-move SFC path and SF instance
    selection.
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 6]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
    Performance Policy Identifier is defined as an optional variable
    length Context Header.  Its structure is shown in Figure 2.
@@ -376,23 +385,21 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    o  U bit: Unassigned bit (see Section 2.5.1 of [RFC8300]).
 
+
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                  [Page 7]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    o  Length: Indicates the length of the Performance Policy Identifier,
       in bytes (see Section 2.5.1 of [RFC8300]).
 
    o  Performance Policy Identifier: Represents an opaque value pointing
       to specific performance policy to be enforced.  The structure and
       semantics of this field are deployment-specific.
-
-
-
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 7]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
 5.  IANA Considerations
 
@@ -434,6 +441,15 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    of the Subscriber Identifier Context Headers from the NSH by the last
    SF making use of such headers soften this issue.
 
+
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                  [Page 8]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    Both Subscriber Identifier and Performance Policy Context Headers
    carry opaque data.  The structure of the identifiers conveyed in
    these Context Headers is communicated only to entitled NSH-aware
@@ -442,14 +458,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    identifier structures together with the presence of specific SFs in a
    service function chain (e.g., lawful intercept SF) reveal sensitive
    information to every on-path device (but also to teams managing these
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 8]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
-
    devices).  Such disclosure is a violation in many jurisdictions
    because such information should be available to very few network
    operator personnel.  Furthermore, access to subscriber data usually
@@ -487,6 +495,17 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 8.1.  Normative References
 
+
+
+
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                  [Page 9]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -496,15 +515,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               Chaining (SFC) Architecture", RFC 7665,
               DOI 10.17487/RFC7665, October 2015,
               <https://www.rfc-editor.org/info/rfc7665>.
-
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                  [Page 9]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -540,6 +550,18 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    [TS23501]  3GPP 23.501 16.3.0, "System architecture for the 5G System
               (5GS),", December 2019.
 
+
+
+
+
+
+
+
+Sarikaya, et al.           Expires May 9, 2021                 [Page 10]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
 Authors' Addresses
 
    Behcet Sarikaya
@@ -554,12 +576,6 @@ Authors' Addresses
    Germany
 
    Email: Dirk.von-Hugo@telekom.de
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                 [Page 10]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
    Mohamed Boucadair
@@ -597,20 +613,4 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Sarikaya, et al.           Expires May 8, 2021                 [Page 11]
+Sarikaya, et al.           Expires May 9, 2021                 [Page 11]
