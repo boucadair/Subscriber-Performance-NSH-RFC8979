@@ -215,8 +215,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    o  Length: Indicates the length of the Subscriber Identifier, in
       bytes (see Section 2.5.1 of [RFC8300]).
 
-   o  Subscriber Identifier: Carries an opaque local subscriber
-      identifier that is assigned to a subscriber by a network operator.
+   o  Subscriber Identifier: Carries an opaque local identifier that is
+      assigned to a subscriber by a network operator.
 
 
 

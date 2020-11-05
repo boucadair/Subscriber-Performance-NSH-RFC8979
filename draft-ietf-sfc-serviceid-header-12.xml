@@ -222,16 +222,16 @@
           <t>Length: Indicates the length of the Subscriber Identifier, in
           bytes (see Section 2.5.1 of <xref target="RFC8300"></xref>).</t>
 
-          <t>Subscriber Identifier: Carries an opaque local subscriber
-          identifier that is assigned to a subscriber by a network
-          operator.<vspace blankLines="1" />For example, this identifier can
-          be generated from some of the information that is already conveyed
-          in the original packets from a host (e.g., internal IP address) or
-          other information that is collected from various sources within an
-          SFC-enabled domain (e.g., line identifier). The use of indirect and
-          non-persistent identification is RECOMMENDED.<vspace
-          blankLines="1" />Aligned with Section 8.2.2 of <xref
-          target="RFC8300"></xref>, this identifier SHOULD be obfuscated. </t>
+          <t>Subscriber Identifier: Carries an opaque local identifier that is
+          assigned to a subscriber by a network operator.<vspace
+          blankLines="1" />For example, this identifier can be generated from
+          some of the information that is already conveyed in the original
+          packets from a host (e.g., internal IP address) or other information
+          that is collected from various sources within an SFC-enabled domain
+          (e.g., line identifier). The use of indirect and non-persistent
+          identification is RECOMMENDED.<vspace blankLines="1" />Aligned with
+          Section 8.2.2 of <xref target="RFC8300"></xref>, this identifier
+          SHOULD be obfuscated. </t>
         </list></t>
 
       <t>The Subscriber Identifier Context Header is used to convey an
