@@ -286,10 +286,11 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    SF MUST ignore that Context Header.  The event should be logged
    locally while a notification alarm may be sent to a Control Element
    if the NSH-aware SF is instructed to do so.  For example, an SF that
-   expects an internal IP address as subscriber identifier will discard
-   Subscriber Identifier Context Headers conveying Mobile Subscriber
-   ISDN Number (MSISDN), International Mobile Subscriber Identity
-   (IMSI), or malformed IP addresses.
+   expects a subscriber identifier generated from an internal IP address
+   will discard Subscriber Identifier Context Headers conveying
+   identifiers generated from Mobile Subscriber ISDN Number (MSISDN),
+   International Mobile Subscriber Identity (IMSI), or malformed IP
+   addresses.
 
    Multiple Subscriber Identifier Context Headers MAY be present in the
    NSH, each carrying a distinct opaque value but all pointing to the
@@ -329,7 +330,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    illustration purposes, an SFF may retrieve the details of usable SFs
    based upon the corresponding performance policy identifier.  Typical
    criteria for instantiating specific SFs include location,
-   performance, or proximity considerations.  For the particular case of
 
 
 
@@ -338,6 +338,7 @@ Sarikaya, et al.           Expires May 9, 2021                  [Page 6]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+   performance, or proximity considerations.  For the particular case of
    UHR services, the stand-by operation of back-up capacity or the
    presence of SFs deployed in multiple instances may be requested.
 
@@ -384,7 +385,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    o  Type: TBD2 (See Section 5).
 
    o  U bit: Unassigned bit (see Section 2.5.1 of [RFC8300]).
-
 
 
 

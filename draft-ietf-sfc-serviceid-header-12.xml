@@ -274,10 +274,11 @@
       a Subscriber Identifier Context Header, an NSH-aware SF MUST ignore that
       Context Header. The event should be logged locally while a notification
       alarm may be sent to a Control Element if the NSH-aware SF is instructed
-      to do so. For example, an SF that expects an internal IP address as
-      subscriber identifier will discard Subscriber Identifier Context Headers
-      conveying Mobile Subscriber ISDN Number (MSISDN), International Mobile
-      Subscriber Identity (IMSI), or malformed IP addresses.</t>
+      to do so. For example, an SF that expects a subscriber identifier
+      generated from an internal IP address will discard Subscriber Identifier
+      Context Headers conveying identifiers generated from Mobile Subscriber
+      ISDN Number (MSISDN), International Mobile Subscriber Identity (IMSI),
+      or malformed IP addresses.</t>
 
       <t>Multiple Subscriber Identifier Context Headers MAY be present in the
       NSH, each carrying a distinct opaque value but all pointing to the same
