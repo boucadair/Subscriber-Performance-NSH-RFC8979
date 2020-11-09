@@ -73,13 +73,14 @@ Table of Contents
    3.  Subscriber Identification NSH Variable-Length Context Header    4
    4.  Performance Policy Identification NSH Variable-Length Context
        Headers . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   5.  MTU Considerations  . . . . . . . . . . . . . . . . . . . . .   8
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
+   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     9.1.  Normative References  . . . . . . . . . . . . . . . . . .  11
+     9.2.  Informative References  . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -105,7 +106,6 @@ Table of Contents
    identifier in order for them to appropriately meet the QoS service
    requirements.  This document also specifies a new NSH Context Header
    (Section 4) to convey such policy identifiers.
-
 
 
 
@@ -149,9 +149,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    document focuses on the data plane behaviour.  Control plane
    considerations are out of the scope.
 
-   The reader may refer to Section 5 of [RFC8300] for MTU
-   considerations.  Such considerations are not reiterated here.
-
    This document adheres to the SFC data plane architecture defined in
    [RFC7665].  This document assumes the reader is familiar with
    [RFC8300].
@@ -162,6 +159,9 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    egress SFC boundary nodes (i.e., to strip the entire NSH, including
    Context Headers).  Revealing any personal and subscriber-related
    information to parties outside the SFC-enabled domain is avoided by
+   design.  Accordingly, the scope for privacy breaches and user
+   tracking is limited to within the SFC-enabled domain where the NSH is
+   used.
 
 
 
@@ -169,10 +169,6 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 3]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
-
-   design.  Accordingly, the scope for privacy breaches and user
-   tracking is limited to within the SFC-enabled domain where the NSH is
-   used.
 
 2.  Conventions and Terminology
 
@@ -208,7 +204,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    o  Metadata Class: MUST be set to 0x0 [RFC8300].
 
-   o  Type: TBD1 (See Section 5).
+   o  Type: TBD1 (See Section 6).
 
    o  U bit: Unassigned bit (see Section 2.5.1 of [RFC8300]).
 
@@ -218,6 +214,10 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    o  Subscriber Identifier: Carries an opaque local identifier that is
       assigned to a subscriber by a network operator.
 
+      While this document does not specify an internal structure for
+      these identifiers, it also does not provide any cryptographic
+      protection for them; any internal structure to the identifier
+      values chosen will thus be visible on the wire if no secure
 
 
 
@@ -226,10 +226,6 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 4]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
-      While this document does not specify an internal structure for
-      these identifiers, it also does not provide any cryptographic
-      protection for them; any internal structure to the identifier
-      values chosen will thus be visible on the wire if no secure
       transport encapsulation is used.  Accordingly, in alignment with
       Section 8.2.2 of [RFC8300], identifier values SHOULD be
       obfsucated.
@@ -274,6 +270,10 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    intermediary NSH-aware node to strip a Subscriber Identifier Context
    Header after processing it.
 
+   NSH-aware SFs MUST ignore Context Headers carrying unknown subscriber
+   identifiers.
+
+
 
 
 
@@ -281,9 +281,6 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 5]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
-
-   NSH-aware SFs MUST ignore Context Headers carrying unknown subscriber
-   identifiers.
 
    Local policies at NSH-aware SFs may require running additional
    validation checks on the content of these Context Headers (e.g.,
@@ -331,6 +328,9 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    computation is centralized and a strict SFP is presented as local
    policy to SF Forwarders (SFFs).
 
+   The Performance Policy Identifier allows for the distributed
+   enforcement of a per-service policy such as a service function path
+
 
 
 Sarikaya, et al.          Expires May 13, 2021                  [Page 6]
@@ -338,8 +338,6 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 6]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
-   The Performance Policy Identifier allows for the distributed
-   enforcement of a per-service policy such as a service function path
    to only include specific SFs instances (e.g., SFs located within the
    same DC or those that are exposing the shortest delay from an SFF).
    Details of this process are implementation-specific.  For
@@ -386,6 +384,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
       Figure 2: Performance Policy Identifier Variable-Length Context
                                   Header
 
+   The description of the fields is as follows:
+
 
 
 
@@ -394,11 +394,9 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 7]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
-   The description of the fields is as follows:
-
    o  Metadata Class: MUST be set to 0x0 [RFC8300].
 
-   o  Type: TBD2 (See Section 5).
+   o  Type: TBD2 (See Section 6).
 
    o  U bit: Unassigned bit (see Section 2.5.1 of [RFC8300]).
 
@@ -409,7 +407,50 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
       to specific performance policy to be enforced.  The structure and
       semantics of this field are deployment-specific.
 
-5.  IANA Considerations
+5.  MTU Considerations
+
+   As discussed in Section 5.6 of [RFC7665], the SFC architecture
+   prescribes that additional information be added to packets to:
+
+   o  Identify SFPs: this is typically the NSH Base (Section 2.2 of
+      [RFC8300]) and Service Path Headers (Section 2.3 of [RFC8300]).
+
+   o  Carry metadata such those defined in Sections 3 and 4.
+
+   o  Steer the traffic along the SFPs: transport encapsulation.
+
+   This added information increases the size of the packet to be carried
+   along an SFP.
+
+   Aligned with Section 5 of [RFC8300], it is RECOMMENDED for network
+   operators to increase the underlying MTU so that NSH traffic is
+   forwarded within an SFC-enabled domain without fragmentation.  The
+   available underlying MTU should be taken into account by network
+   operators when providing SFs with the required Context Headers to be
+   injected per SFP and the size of the data to be carried in these
+   Context Headers.
+
+   If the underlying MTU cannot be increased to accommodate the NSH
+   overhead, network operators may rely upon a transport encapsulation
+   protocol to the required fragmentation handling.  The impact of
+   activating such feature on SFFs should be carefully assessed by
+   network operators (Section 5.6 of [RFC7665]).
+
+   When dealing with MTU issues, network operators should consider the
+   limitations of various transport encapsulations such as those
+   discussed in [I-D.ietf-intarea-tunnels].
+
+
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                  [Page 8]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
+6.  IANA Considerations
 
    This document requests IANA to assign the following types from the
    "NSH IETF- Assigned Optional Variable-Length Metadata Types" (0x0000
@@ -424,7 +465,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
         | TBD2  | Performance Policy Identifier | [ThisDocument] |
         +-------+-------------------------------+----------------+
 
-6.  Security Considerations
+7.  Security Considerations
 
    Data plane SFC-related security considerations, including privacy,
    are discussed in Section 6 [RFC7665] and Section 8 of [RFC8300].
@@ -442,14 +483,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    Both Subscriber Identifier and Performance Policy Context Headers
    carry opaque data.  This identifier is locally assigned by a network
-
-
-
-Sarikaya, et al.          Expires May 13, 2021                  [Page 8]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
-
    provider and can be generated from some of the information that is
    already conveyed in the original packets from a host (e.g., internal
    IP address) or other information that is collected from various
@@ -465,6 +498,14 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Headers in the same NSH allows a misbehaving node from within the
    SFC-enabled domain to bind these identifiers to the same subscriber.
    This can be used to track that subscriber more effectively.  If
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                  [Page 9]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    encryption is not enabled, the use of non persistent identifiers as
    well as the removal of the Subscriber Identifier Context Headers from
    the NSH by the last SF making use of such headers soften this issue.
@@ -496,21 +537,11 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    network operators when enhanced SF-to-SF security protection of NSH
    metadata is required (e.g., protect against compromised SFFs).
 
-
-
-
-
-
-Sarikaya, et al.          Expires May 13, 2021                  [Page 9]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
-
    Some events are logged locally with notification alerts sent by NSH-
    aware nodes to a Control Element.  These events SHOULD be rate
    limited.
 
-7.  Acknowledgements
+8.  Acknowledgements
 
    Comments from Joel Halpern on a previous version and by Carlos
    Bernardos are appreciated.
@@ -522,13 +553,22 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    Many thanks to Robert Sparks for the secdir review.
 
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                 [Page 10]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    Thanks to Barry Leiba, Erik Kline, Eric Vyncke, and Robert Wilton for
    the IESG review.  Special thanks to Benjamin Kaduk for the careful
    review and suggestions that enhanced this specification.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -549,18 +589,12 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               DOI 10.17487/RFC8300, January 2018,
               <https://www.rfc-editor.org/info/rfc8300>.
 
-8.2.  Informative References
+9.2.  Informative References
 
-
-
-
-
-
-
-Sarikaya, et al.          Expires May 13, 2021                 [Page 10]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
+   [I-D.ietf-intarea-tunnels]
+              Touch, J. and M. Townsley, "IP Tunnels in the Internet
+              Architecture", draft-ietf-intarea-tunnels-10 (work in
+              progress), September 2019.
 
    [I-D.ietf-sfc-nsh-integrity]
               Boucadair, M., Reddy.K, T., and D. Wing, "Integrity
@@ -573,6 +607,16 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               J. Uttaro, "Service Function Chaining Use Cases in Mobile
               Networks", draft-ietf-sfc-use-case-mobility-09 (work in
               progress), January 2019.
+
+
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                 [Page 11]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
 
    [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
               Morris, J., Hansen, M., and R. Smith, "Privacy
@@ -607,56 +651,12 @@ Authors' Addresses
    Email: Dirk.von-Hugo@telekom.de
 
 
-
-
-
-
-
-
-Sarikaya, et al.          Expires May 13, 2021                 [Page 11]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
-
    Mohamed Boucadair
    Orange
    Rennes 3500
    France
 
    Email: mohamed.boucadair@orange.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

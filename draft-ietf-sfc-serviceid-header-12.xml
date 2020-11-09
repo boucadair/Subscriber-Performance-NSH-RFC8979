@@ -157,9 +157,6 @@
       focuses on the data plane behaviour. Control plane considerations are
       out of the scope.</t>
 
-      <t>The reader may refer to Section 5 of <xref target="RFC8300"></xref>
-      for MTU considerations. Such considerations are not reiterated here.</t>
-
       <t>This document adheres to the SFC data plane architecture defined in
       <xref target="RFC7665"></xref>. This document assumes the reader is
       familiar with <xref target="RFC8300"></xref>.</t>
@@ -390,6 +387,43 @@
         </list></t>
     </section>
 
+    <section title="MTU Considerations">
+      <t>As discussed in Section 5.6 of <xref target="RFC7665"></xref>, the
+      SFC architecture prescribes that additional information be added to
+      packets to: <list style="symbols">
+          <t>Identify SFPs: this is typically the NSH Base (Section 2.2 of
+          <xref target="RFC8300"></xref>) and Service Path Headers (Section
+          2.3 of <xref target="RFC8300"></xref>).</t>
+
+          <t> Carry metadata such those defined in Sections <xref
+          format="counter" target="solutions"></xref> and <xref
+          format="counter" target="sol2"></xref>. </t>
+
+          <t>Steer the traffic along the SFPs: transport encapsulation. </t>
+        </list></t>
+
+      <t>This added information increases the size of the packet to be carried
+      along an SFP.</t>
+
+      <t>Aligned with Section 5 of <xref target="RFC8300"></xref>, it is
+      RECOMMENDED for network operators to increase the underlying MTU so that
+      NSH traffic is forwarded within an SFC-enabled domain without
+      fragmentation. The available underlying MTU should be taken into account
+      by network operators when providing SFs with the required Context
+      Headers to be injected per SFP and the size of the data to be carried in
+      these Context Headers. </t>
+
+      <t>If the underlying MTU cannot be increased to accommodate the NSH
+      overhead, network operators may rely upon a transport encapsulation
+      protocol to the required fragmentation handling. The impact of
+      activating such feature on SFFs should be carefully assessed by network
+      operators (Section 5.6 of <xref target="RFC7665"></xref>).</t>
+
+      <t>When dealing with MTU issues, network operators should consider the
+      limitations of various transport encapsulations such as those discussed
+      in <xref target="I-D.ietf-intarea-tunnels"></xref>. </t>
+    </section>
+
     <section anchor="IANA" title="IANA Considerations ">
       <t>This document requests IANA to assign the following types from the
       "NSH IETF- Assigned Optional Variable-Length Metadata Types" (0x0000
@@ -519,6 +553,8 @@
       <?rfc include='reference.RFC.8371'?>
 
       <?rfc include='reference.RFC.6973'?>
+
+      <?rfc include='reference.I-D.ietf-intarea-tunnels'?>
 
       <?rfc include='reference.I-D.ietf-sfc-use-case-mobility'?>
 
