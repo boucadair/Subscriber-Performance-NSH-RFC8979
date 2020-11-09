@@ -422,6 +422,12 @@
       are discussed in Section 6 <xref target="RFC7665"></xref> and Section 8
       of <xref target="RFC8300"></xref>.</t>
 
+      <t>As specified in <xref target="RFC8300"></xref>, means to prevent
+      leaking privacy-related information outside an SFC-enabled domain are
+      natively supported by the NSH given that the last SFF of an SFP will
+      systematically remove the NSH (and therefore the identifiers defined in
+      this specification) before forwarding a packet exiting the SFP.</t>
+
       <t>Nodes that are involved in an SFC-enabled domain are assumed to be
       trusted (Section 1.1 of <xref target="RFC8300"> </xref>). Means to check
       that only authorized nodes are solicited when a packet is crossing an
@@ -432,12 +438,13 @@
       provider and can be generated from some of the information that is
       already conveyed in the original packets from a host (e.g., internal IP
       address) or other information that is collected from various sources
-      within an SFC-enabled domain (e.g., line identifier). The structure of
-      the identifiers conveyed in these Context Headers is communicated only
-      to entitled NSH-aware nodes. Nevertheless, some structures may be easily
-      inferred from the headers if trivial stuctures are used (e.g., IP
-      addresses). The use of indirect and non-persistent identification is
-      thus RECOMMENDED. </t>
+      within an SFC-enabled domain (e.g., line identifier). As w The structure
+      of the identifiers conveyed in these Context Headers is communicated
+      only to entitled NSH-aware nodes. Nevertheless, some structures may be
+      easily inferred from the headers if trivial stuctures are used (e.g., IP
+      addresses). As persistent identifiers facilitate tracking over time, the
+      use of indirect and non-persistent identification is thus RECOMMENDED.
+      </t>
 
       <t>Moreover, the presence of multiple Subscriber Identifier Context
       Headers in the same NSH allows a misbehaving node from within the

@@ -75,7 +75,7 @@ Table of Contents
        Headers . . . . . . . . . . . . . . . . . . . . . . . . . . .   6
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   9
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  10
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  10
      8.2.  Informative References  . . . . . . . . . . . . . . . . .  10
@@ -429,6 +429,12 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    Data plane SFC-related security considerations, including privacy,
    are discussed in Section 6 [RFC7665] and Section 8 of [RFC8300].
 
+   As specified in [RFC8300], means to prevent leaking privacy-related
+   information outside an SFC-enabled domain are natively supported by
+   the NSH given that the last SFF of an SFP will systematically remove
+   the NSH (and therefore the identifiers defined in this specification)
+   before forwarding a packet exiting the SFP.
+
    Nodes that are involved in an SFC-enabled domain are assumed to be
    trusted (Section 1.1 of [RFC8300]).  Means to check that only
    authorized nodes are solicited when a packet is crossing an SFC-
@@ -436,12 +442,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    Both Subscriber Identifier and Performance Policy Context Headers
    carry opaque data.  This identifier is locally assigned by a network
-   provider and can be generated from some of the information that is
-   already conveyed in the original packets from a host (e.g., internal
-   IP address) or other information that is collected from various
-   sources within an SFC-enabled domain (e.g., line identifier).  The
-   structure of the identifiers conveyed in these Context Headers is
-   communicated only to entitled NSH-aware nodes.  Nevertheless, some
 
 
 
@@ -450,9 +450,16 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 8]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+   provider and can be generated from some of the information that is
+   already conveyed in the original packets from a host (e.g., internal
+   IP address) or other information that is collected from various
+   sources within an SFC-enabled domain (e.g., line identifier).  As w
+   The structure of the identifiers conveyed in these Context Headers is
+   communicated only to entitled NSH-aware nodes.  Nevertheless, some
    structures may be easily inferred from the headers if trivial
-   stuctures are used (e.g., IP addresses).  The use of indirect and
-   non-persistent identification is thus RECOMMENDED.
+   stuctures are used (e.g., IP addresses).  As persistent identifiers
+   facilitate tracking over time, the use of indirect and non-persistent
+   identification is thus RECOMMENDED.
 
    Moreover, the presence of multiple Subscriber Identifier Context
    Headers in the same NSH allows a misbehaving node from within the
@@ -489,14 +496,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    network operators when enhanced SF-to-SF security protection of NSH
    metadata (e.g., protect against compromised SFFs) is required.
 
-   Some events are logged locally with notification alerts sent by NSH-
-   aware nodes to a Control Element.  These events SHOULD be rate
-   limited.
 
-7.  Acknowledgements
-
-   Comments from Joel Halpern on a previous version and by Carlos
-   Bernardos are appreciated.
 
 
 
@@ -505,6 +505,15 @@ Sarikaya, et al.          Expires May 13, 2021                  [Page 9]
 
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
+
+   Some events are logged locally with notification alerts sent by NSH-
+   aware nodes to a Control Element.  These events SHOULD be rate
+   limited.
+
+7.  Acknowledgements
+
+   Comments from Joel Halpern on a previous version and by Carlos
+   Bernardos are appreciated.
 
    Contributions and review by Christian Jacquenet, Danny Lachos,
    Debashish Purkayastha, Christian Esteve Rothenberg, Kyle Larose,
@@ -542,6 +551,17 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 8.2.  Informative References
 
+
+
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                 [Page 10]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    [I-D.ietf-sfc-nsh-integrity]
               Boucadair, M., Reddy.K, T., and D. Wing, "Integrity
               Protection for the Network Service Header (NSH) and
@@ -553,14 +573,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               J. Uttaro, "Service Function Chaining Use Cases in Mobile
               Networks", draft-ietf-sfc-use-case-mobility-09 (work in
               progress), January 2019.
-
-
-
-
-Sarikaya, et al.          Expires May 13, 2021                 [Page 10]
-
-Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
-
 
    [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
               Morris, J., Hansen, M., and R. Smith, "Privacy
@@ -595,6 +607,17 @@ Authors' Addresses
    Email: Dirk.von-Hugo@telekom.de
 
 
+
+
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                 [Page 11]
+
+Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
+
+
    Mohamed Boucadair
    Orange
    Rennes 3500
@@ -613,4 +636,37 @@ Authors' Addresses
 
 
 
-Sarikaya, et al.          Expires May 13, 2021                 [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sarikaya, et al.          Expires May 13, 2021                 [Page 12]
