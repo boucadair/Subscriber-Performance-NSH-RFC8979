@@ -494,7 +494,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    mechanism for encrypting sensitive NSH data is specified in
    [I-D.ietf-sfc-nsh-integrity].  This mechanism can be considered by
    network operators when enhanced SF-to-SF security protection of NSH
-   metadata (e.g., protect against compromised SFFs) is required.
+   metadata is required (e.g., protect against compromised SFFs).
 
 
 

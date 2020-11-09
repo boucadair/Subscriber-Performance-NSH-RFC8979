@@ -479,8 +479,8 @@
       as IPsec) must be used. A mechanism for encrypting sensitive NSH data is
       specified in <xref target="I-D.ietf-sfc-nsh-integrity"></xref>. This
       mechanism can be considered by network operators when enhanced SF-to-SF
-      security protection of NSH metadata (e.g., protect against compromised
-      SFFs) is required.</t>
+      security protection of NSH metadata is required (e.g., protect against
+      compromised SFFs).</t>
 
       <t>Some events are logged locally with notification alerts sent by
       NSH-aware nodes to a Control Element. These events SHOULD be rate
