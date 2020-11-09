@@ -227,7 +227,7 @@
           identifier values chosen will thus be visible on the wire if no
           secure transport encapsulation is used. Accordingly, in alignment
           with Section 8.2.2 of <xref target="RFC8300"></xref>, identifier
-          values SHOULD be obfsucated.</t>
+          values SHOULD be obfuscated.</t>
         </list></t>
 
       <t>The Subscriber Identifier Context Header is used by service functions
@@ -475,10 +475,10 @@
       within an SFC-enabled domain (e.g., line identifier). As w The structure
       of the identifiers conveyed in these Context Headers is communicated
       only to entitled NSH-aware nodes. Nevertheless, some structures may be
-      easily inferred from the headers if trivial stuctures are used (e.g., IP
-      addresses). As persistent identifiers facilitate tracking over time, the
-      use of indirect and non-persistent identification is thus RECOMMENDED.
-      </t>
+      easily inferred from the headers if trivial structures are used (e.g.,
+      IP addresses). As persistent identifiers facilitate tracking over time,
+      the use of indirect and non-persistent identification is thus
+      RECOMMENDED. </t>
 
       <t>Moreover, the presence of multiple Subscriber Identifier Context
       Headers in the same NSH allows a misbehaving node from within the
@@ -533,8 +533,10 @@
       <t>Many thanks to Robert Sparks for the secdir review.</t>
 
       <t>Thanks to Barry Leiba, Erik Kline, Eric Vyncke, and Robert Wilton for
-      the IESG review. Special thanks to Benjamin Kaduk for the careful review
-      and suggestions that enhanced this specification.</t>
+      the IESG review. </t>
+
+      <t>Special thanks to Benjamin Kaduk for the careful review and
+      suggestions that enhanced this specification.</t>
     </section>
   </middle>
 

@@ -228,7 +228,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
       transport encapsulation is used.  Accordingly, in alignment with
       Section 8.2.2 of [RFC8300], identifier values SHOULD be
-      obfsucated.
+      obfuscated.
 
    The Subscriber Identifier Context Header is used by service functions
    to enforce per-subscriber policies (e.g., resource quota, customized
@@ -490,7 +490,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    The structure of the identifiers conveyed in these Context Headers is
    communicated only to entitled NSH-aware nodes.  Nevertheless, some
    structures may be easily inferred from the headers if trivial
-   stuctures are used (e.g., IP addresses).  As persistent identifiers
+   structures are used (e.g., IP addresses).  As persistent identifiers
    facilitate tracking over time, the use of indirect and non-persistent
    identification is thus RECOMMENDED.
 
@@ -563,8 +563,10 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
    Thanks to Barry Leiba, Erik Kline, Eric Vyncke, and Robert Wilton for
-   the IESG review.  Special thanks to Benjamin Kaduk for the careful
-   review and suggestions that enhanced this specification.
+   the IESG review.
+
+   Special thanks to Benjamin Kaduk for the careful review and
+   suggestions that enhanced this specification.
 
 9.  References
 
@@ -607,8 +609,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
               J. Uttaro, "Service Function Chaining Use Cases in Mobile
               Networks", draft-ietf-sfc-use-case-mobility-09 (work in
               progress), January 2019.
-
-
 
 
 
