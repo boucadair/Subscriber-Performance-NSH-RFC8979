@@ -224,20 +224,31 @@
 
           <t>Subscriber Identifier: Carries an opaque local identifier that is
           assigned to a subscriber by a network operator.<vspace
-          blankLines="1" />For example, this identifier can be generated from
-          some of the information that is already conveyed in the original
-          packets from a host (e.g., internal IP address) or other information
-          that is collected from various sources within an SFC-enabled domain
-          (e.g., line identifier). The use of indirect and non-persistent
-          identification is RECOMMENDED.<vspace blankLines="1" />Aligned with
-          Section 8.2.2 of <xref target="RFC8300"></xref>, this identifier
-          SHOULD be obfuscated. </t>
+          blankLines="1" />While this document does not specify an internal
+          structure for these identifiers, it also does not provide any
+          cryptographic protection for them; any internal structure to the
+          identifier values chosen will thus be visible on the wire if no
+          secure transport encapsulation is used. Accordingly, in alignment
+          with Section 8.2.2 of <xref target="RFC8300"></xref>, identifier
+          values SHOULD be obfsucated.</t>
         </list></t>
 
-      <t>The Subscriber Identifier Context Header is used to convey an
-      identifier assigned by the service provider to uniquely identify a
-      subscriber. This subscriber identifier can be used by service functions
-      to enforce per-subscriber policies (e.g., apply resource quota).</t>
+      <t>The Subscriber Identifier Context Header is used by service functions
+      to enforce per-subscriber policies (e.g., resource quota, customized
+      filtering profile, accounting). To that aim, network operators may rely
+      on identifiers that are generated from those used in legacy deployments
+      (e.g., Section 3.3 of<xref target="I-D.ietf-sfc-use-case-mobility">
+      </xref>). Alternatively, network operators may use identifiers that are
+      associated with customized policy profiles that are preconfigured on SFs
+      using an out of band mechanism. Such mechanism can be used to rotate the
+      identifiers allowing thus for better unlinkability (Section 3.2 of <xref
+      target="RFC6973"></xref>). Such alternative methods may be suboptimal
+      (e.g., scalability issues induced by maintaining and processing finer
+      granular profiles) or inadequate to provide some per-subscriber
+      policies. The assessment whether a method for defining a subscriber
+      identifier provides the required functionality and that it is compliant
+      with SFs capabilities with the intended performance levels is deployment
+      specific.</t>
 
       <t>The classifier and NSH-aware SFs MAY inject a Subscriber Identifier
       Context Header as a function of a local policy. In order to prevent
@@ -256,11 +267,11 @@
       such as frequency, thresholds, and content of the alarm, should be
       configurable.</t>
 
-      <t>Intermediary NSH-aware nodes have to preserve Subscriber Identifier
-      Context Headers (i.e., the information can be passed to next hop
-      NSH-aware nodes), but local policy may require an intermediary NSH-aware
-      node to strip a Subscriber Identifier Context Header after processing
-      it.</t>
+      <t>The default behavior of intermediary NSH-aware nodes is to preserve
+      Subscriber Identifier Context Headers (i.e., the information can be
+      passed to next hop NSH-aware nodes), but local policy may require an
+      intermediary NSH-aware node to strip a Subscriber Identifier Context
+      Header after processing it.</t>
 
       <t>NSH-aware SFs MUST ignore Context Headers carrying unknown subscriber
       identifiers.</t>
@@ -332,10 +343,10 @@
       length Context Header. Its structure is shown in <xref
       target="arch9"></xref>.</t>
 
-      <t>Intermediary NSH-aware nodes have to preserve such Context Headers
-      (i.e., the information can be passed to next hop NSH-aware nodes), but
-      local policy may require an intermediary NSH-aware node to strip one
-      after processing it.</t>
+      <t>The default behavior of intermediary NSH-aware nodes have to preserve
+      such Context Headers (i.e., the information can be passed to next hop
+      NSH-aware nodes), but local policy may require an intermediary NSH-aware
+      node to strip one after processing it.</t>
 
       <t>Multiple Performance Policy Identifier Context Headers MAY be present
       in the NSH, each carrying an opaque value for a distinct policy that
@@ -408,52 +419,61 @@
 
     <section anchor="Security" title="Security Considerations">
       <t>Data plane SFC-related security considerations, including privacy,
-      are discussed in <xref target="RFC7665"></xref> and <xref
-      target="RFC8300"></xref>.</t>
+      are discussed in Section 6 <xref target="RFC7665"></xref> and Section 8
+      of <xref target="RFC8300"></xref>.</t>
 
       <t>Nodes that are involved in an SFC-enabled domain are assumed to be
       trusted (Section 1.1 of <xref target="RFC8300"> </xref>). Means to check
       that only authorized nodes are solicited when a packet is crossing an
       SFC-enabled domain are out of scope of this document.</t>
 
+      <t>Both Subscriber Identifier and Performance Policy Context Headers
+      carry opaque data. This identifier is locally assigned by a network
+      provider and can be generated from some of the information that is
+      already conveyed in the original packets from a host (e.g., internal IP
+      address) or other information that is collected from various sources
+      within an SFC-enabled domain (e.g., line identifier). The structure of
+      the identifiers conveyed in these Context Headers is communicated only
+      to entitled NSH-aware nodes. Nevertheless, some structures may be easily
+      inferred from the headers if trivial stuctures are used (e.g., IP
+      addresses). The use of indirect and non-persistent identification is
+      thus RECOMMENDED. </t>
+
+      <t>Moreover, the presence of multiple Subscriber Identifier Context
+      Headers in the same NSH allows a misbehaving node from within the
+      SFC-enabled domain to bind these identifiers to the same subscriber.
+      This can be used to track that subscriber more effectively. If
+      encryption is not enabled, the use of non persistent identifiers as well
+      as the removal of the Subscriber Identifier Context Headers from the NSH
+      by the last SF making use of such headers soften this issue.</t>
+
       <t>A misbehaving node from within the SFC-enabled domain may alter the
       content of Subscriber Identifier and Performance Policy Context Headers
       which may lead to service disruption. Such attack is not unique to the
-      Context Headers defined in this document; measures discussed in <xref
-      target="RFC8300"></xref> are to be followed. A mechanism for NSH
-      integrity is specified in <xref
+      Context Headers defined in this document; measures discussed in Section
+      8 of <xref target="RFC8300"></xref> are to be followed. A mechanism for
+      NSH integrity is specified in <xref
       target="I-D.ietf-sfc-nsh-integrity"></xref>.</t>
 
-      <t>The presence of multiple Subscriber Identifier Context Headers in the
-      same NSH allows a misbehaving node from within the SFC-enabled domain to
-      bind these identifiers to the same subscriber. This can be used to track
-      that subscriber more effectively. If encryption is not enabled, the use
-      of non persistent identifiers as well as the removal of the Subscriber
-      Identifier Context Headers from the NSH by the last SF making use of
-      such headers soften this issue.</t>
-
-      <t>Both Subscriber Identifier and Performance Policy Context Headers
-      carry opaque data. The structure of the identifiers conveyed in these
-      Context Headers is communicated only to entitled NSH-aware nodes.
-      Nevertheless, some structures may be easily inferred from the headers
-      (e.g., IP addresses). If no secure transport encapsulation is enabled,
-      the use of trivial subscriber identifier structures together with the
-      presence of specific SFs in a service function chain may reveal
-      sensitive information to every on-path device (but also to teams
-      managing these devices). Such disclosure can be a violation in many
-      jurisdictions because such information should be available to very few
-      network operator personnel. Furthermore, access to subscriber data
-      usually requires specific access privilege levels. To maintain that
-      protection, an SF keeping operational logs should not log the content of
-      a Subscriber and Performance Policy Context Headers unless the SF
-      actually uses the content of these headers for its operation. As
-      discussed in Section 8.2.2 of <xref target="RFC8300"></xref>,
-      subscriber-identifying information should be obfuscated and security
-      features in the transport encapsulation protocol (such as IPsec) must be
-      used. A mechanism for encrypting sensitive NSH data is specified in
-      <xref target="I-D.ietf-sfc-nsh-integrity"></xref>. This mechanism can be
-      considered by network operators when enhanced SF-to-SF security
-      protection of NSH metadata is required. </t>
+      <t>If no secure transport encapsulation is enabled, the use of trivial
+      subscriber identifier structures together with the presence of specific
+      SFs in a service function chain may reveal sensitive information to
+      every on-path device (but also to teams managing these devices). Such
+      disclosure can be a violation in many jurisdictions because such
+      information should be available to very few network operator personnel.
+      Furthermore, access to subscriber data usually requires specific access
+      privilege levels. To maintain that protection, an SF keeping operational
+      logs should not log the content of a Subscriber and Performance Policy
+      Context Headers unless the SF actually uses the content of these headers
+      for its operation. As discussed in Section 8.2.2 of <xref
+      target="RFC8300"></xref>, subscriber-identifying information should be
+      obfuscated and, if an operator deems cryptographic integrity protection
+      needed, security features in the transport encapsulation protocol (such
+      as IPsec) must be used. A mechanism for encrypting sensitive NSH data is
+      specified in <xref target="I-D.ietf-sfc-nsh-integrity"></xref>. This
+      mechanism can be considered by network operators when enhanced SF-to-SF
+      security protection of NSH metadata (e.g., protect against compromised
+      SFFs) is required.</t>
 
       <t>Some events are logged locally with notification alerts sent by
       NSH-aware nodes to a Control Element. These events SHOULD be rate
@@ -490,6 +510,8 @@
 
     <references title="Informative References">
       <?rfc include='reference.RFC.8371'?>
+
+      <?rfc include='reference.RFC.6973'?>
 
       <?rfc include='reference.I-D.ietf-sfc-use-case-mobility'?>
 
