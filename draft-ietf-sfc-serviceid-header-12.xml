@@ -85,6 +85,40 @@
 
     <workgroup>SFC</workgroup>
 
+    <keyword>subscriber policy</keyword>
+
+    <keyword>policy enforcement</keyword>
+
+    <keyword>subscriber</keyword>
+
+    <keyword>policy</keyword>
+
+    <keyword>quota</keyword>
+
+    <keyword>identification</keyword>
+
+    <keyword>implicit identification</keyword>
+
+    <keyword>service chain</keyword>
+
+    <keyword>service function chain</keyword>
+
+    <keyword>sfc</keyword>
+
+    <keyword>SFP</keyword>
+
+    <keyword>service function path</keyword>
+
+    <keyword>classification</keyword>
+
+    <keyword>5G</keyword>
+
+    <keyword>traffic steering</keyword>
+
+    <keyword>MSISDN</keyword>
+
+    <keyword>IMSI</keyword>
+
     <abstract>
       <t>This document defines two Variable-Length Context Headers that can be
       carried in the Network Service Header: the Subscriber and Performance
@@ -472,13 +506,13 @@
       provider and can be generated from some of the information that is
       already conveyed in the original packets from a host (e.g., internal IP
       address) or other information that is collected from various sources
-      within an SFC-enabled domain (e.g., line identifier). As w The structure
-      of the identifiers conveyed in these Context Headers is communicated
-      only to entitled NSH-aware nodes. Nevertheless, some structures may be
-      easily inferred from the headers if trivial structures are used (e.g.,
-      IP addresses). As persistent identifiers facilitate tracking over time,
-      the use of indirect and non-persistent identification is thus
-      RECOMMENDED. </t>
+      within an SFC-enabled domain (e.g., line identifier). The structure of
+      the identifiers conveyed in these Context Headers is communicated only
+      to entitled NSH-aware nodes. Nevertheless, some structures may be easily
+      inferred from the headers if trivial structures are used (e.g., IP
+      addresses). As persistent identifiers facilitate tracking over time, the
+      use of indirect and non-persistent identification is thus RECOMMENDED.
+      </t>
 
       <t>Moreover, the presence of multiple Subscriber Identifier Context
       Headers in the same NSH allows a misbehaving node from within the
@@ -500,7 +534,7 @@
       subscriber identifier structures together with the presence of specific
       SFs in a service function chain may reveal sensitive information to
       every on-path device (but also to teams managing these devices). Such
-      disclosure can be a violation in many jurisdictions because such
+      disclosure can be a violation of legal requirements because such
       information should be available to very few network operator personnel.
       Furthermore, access to subscriber data usually requires specific access
       privilege levels. To maintain that protection, an SF keeping operational

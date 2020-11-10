@@ -486,8 +486,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    provider and can be generated from some of the information that is
    already conveyed in the original packets from a host (e.g., internal
    IP address) or other information that is collected from various
-   sources within an SFC-enabled domain (e.g., line identifier).  As w
-   The structure of the identifiers conveyed in these Context Headers is
+   sources within an SFC-enabled domain (e.g., line identifier).  The
+   structure of the identifiers conveyed in these Context Headers is
    communicated only to entitled NSH-aware nodes.  Nevertheless, some
    structures may be easily inferred from the headers if trivial
    structures are used (e.g., IP addresses).  As persistent identifiers
@@ -521,7 +521,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    subscriber identifier structures together with the presence of
    specific SFs in a service function chain may reveal sensitive
    information to every on-path device (but also to teams managing these
-   devices).  Such disclosure can be a violation in many jurisdictions
+   devices).  Such disclosure can be a violation of legal requirements
    because such information should be available to very few network
    operator personnel.  Furthermore, access to subscriber data usually
    requires specific access privilege levels.  To maintain that
