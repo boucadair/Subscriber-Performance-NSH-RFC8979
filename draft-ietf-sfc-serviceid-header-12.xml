@@ -306,7 +306,7 @@
       Subscriber Identifier Context Headers (i.e., the information can be
       passed to next hop NSH-aware nodes), but local policy may require an
       intermediary NSH-aware node to strip a Subscriber Identifier Context
-      Header after processing it.</t>
+      Header after processing it. </t>
 
       <t>NSH-aware SFs MUST ignore Context Headers carrying unknown subscriber
       identifiers.</t>
@@ -531,7 +531,7 @@
       as the removal of the Subscriber Identifier Context Headers from the NSH
       by the last SF making use of such headers soften this issue (see "data
       minimization" discussed in Section 3 of <xref
-      target="RFC8165"></xref>)</t>
+      target="RFC8165"></xref>).</t>
 
       <t>A misbehaving node from within the SFC-enabled domain may alter the
       content of Subscriber Identifier and Performance Policy Context Headers

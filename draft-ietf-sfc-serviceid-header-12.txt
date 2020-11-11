@@ -526,7 +526,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    encryption is not enabled, the use of non persistent identifiers as
    well as the removal of the Subscriber Identifier Context Headers from
    the NSH by the last SF making use of such headers soften this issue
-   (see "data minimization" discussed in Section 3 of [RFC8165])
+   (see "data minimization" discussed in Section 3 of [RFC8165]).
 
    A misbehaving node from within the SFC-enabled domain may alter the
    content of Subscriber Identifier and Performance Policy Context
