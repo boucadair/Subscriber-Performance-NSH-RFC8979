@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-sfc-serviceid-header-12"
+<rfc category="std" docName="draft-ietf-sfc-serviceid-header-13"
      ipr="trust200902">
   <front>
     <title abbrev="NSH Subscriber/Performance Policy TLVs">Service Function
@@ -141,8 +141,9 @@
       sufficient to unambiguously identify a subscriber. This document fills
       this void by specifying a new Network Service Header (NSH) <xref
       target="RFC8300"></xref> Context Header to convey and disseminate such
-      information within the boundaries of a single administrative domain
-      (<xref target="solutions"></xref>).</t>
+      information within the boundaries of a single administrative domain. As
+      discussed in <xref target="solutions"></xref>, the use of obfuscated and
+      non-persistent identifiers is recommended.</t>
 
       <t>Also, traffic steering by means of SFC may be driven, for example, by
       QoS (Quality of Service) considerations. Typically, QoS information may
@@ -196,14 +197,17 @@
       familiar with <xref target="RFC8300"></xref>.</t>
 
       <t>This document assumes the NSH is used exclusively within a single
-      administrative domain. This document adheres to the recommendations in
+      administrative domain. This document follows to the recommendations in
       <xref target="RFC8300"></xref> for handling the Context Headers at both
       ingress and egress SFC boundary nodes (i.e., to strip the entire NSH,
-      including Context Headers). Revealing any personal and
-      subscriber-related information to parties outside the SFC-enabled domain
-      is avoided by design. Accordingly, the scope for privacy breaches and
-      user tracking is limited to within the SFC-enabled domain where the NSH
-      is used.</t>
+      including Context Headers). Revealing any subscriber-related information
+      to parties outside the SFC-enabled domain is avoided by design.
+      Accordingly, the scope for privacy breaches and user tracking is limited
+      to within the SFC-enabled domain where the NSH is used. It is assumed
+      that appropriate mechanisms to monitor and audit an SFC-enabled domain
+      to detect misbehavior and to deter misuse are in place. </t>
+
+      <t>MTU considerations are discussed in <xref target="MTU"></xref>. </t>
     </section>
 
     <section title="Conventions and Terminology">
@@ -421,7 +425,7 @@
         </list></t>
     </section>
 
-    <section title="MTU Considerations">
+    <section anchor="MTU" title="MTU Considerations">
       <t>As discussed in Section 5.6 of <xref target="RFC7665"></xref>, the
       SFC architecture prescribes that additional information be added to
       packets to: <list style="symbols">
@@ -429,11 +433,11 @@
           <xref target="RFC8300"></xref>) and Service Path Headers (Section
           2.3 of <xref target="RFC8300"></xref>).</t>
 
-          <t> Carry metadata such those defined in Sections <xref
+          <t>Carry metadata such those defined in Sections <xref
           format="counter" target="solutions"></xref> and <xref
-          format="counter" target="sol2"></xref>. </t>
+          format="counter" target="sol2"></xref>.</t>
 
-          <t>Steer the traffic along the SFPs: transport encapsulation. </t>
+          <t>Steer the traffic along the SFPs: transport encapsulation.</t>
         </list></t>
 
       <t>This added information increases the size of the packet to be carried
@@ -445,17 +449,17 @@
       fragmentation. The available underlying MTU should be taken into account
       by network operators when providing SFs with the required Context
       Headers to be injected per SFP and the size of the data to be carried in
-      these Context Headers. </t>
+      these Context Headers.</t>
 
       <t>If the underlying MTU cannot be increased to accommodate the NSH
       overhead, network operators may rely upon a transport encapsulation
-      protocol to the required fragmentation handling. The impact of
+      protocol with the required fragmentation handling. The impact of
       activating such feature on SFFs should be carefully assessed by network
       operators (Section 5.6 of <xref target="RFC7665"></xref>).</t>
 
       <t>When dealing with MTU issues, network operators should consider the
       limitations of various transport encapsulations such as those discussed
-      in <xref target="I-D.ietf-intarea-tunnels"></xref>. </t>
+      in <xref target="I-D.ietf-intarea-tunnels"></xref>.</t>
     </section>
 
     <section anchor="IANA" title="IANA Considerations ">
@@ -488,7 +492,12 @@
     <section anchor="Security" title="Security Considerations">
       <t>Data plane SFC-related security considerations, including privacy,
       are discussed in Section 6 <xref target="RFC7665"></xref> and Section 8
-      of <xref target="RFC8300"></xref>.</t>
+      of <xref target="RFC8300"></xref>. In particular, Section 8.2.2 of <xref
+      target="RFC8300"></xref> states that attached metadata (i.e., Context
+      Headers) should be limited to that necessary for correct operation of
+      the SFP. That section indicates that metadata considerations that
+      operators can take into account when using NSH are discussed in <xref
+      target="RFC8165"></xref>.</t>
 
       <t>As specified in <xref target="RFC8300"></xref>, means to prevent
       leaking privacy-related information outside an SFC-enabled domain are
@@ -511,8 +520,8 @@
       to entitled NSH-aware nodes. Nevertheless, some structures may be easily
       inferred from the headers if trivial structures are used (e.g., IP
       addresses). As persistent identifiers facilitate tracking over time, the
-      use of indirect and non-persistent identification is thus RECOMMENDED.
-      </t>
+      use of indirect and non-persistent identification is thus
+      RECOMMENDED.</t>
 
       <t>Moreover, the presence of multiple Subscriber Identifier Context
       Headers in the same NSH allows a misbehaving node from within the
@@ -520,7 +529,9 @@
       This can be used to track that subscriber more effectively. If
       encryption is not enabled, the use of non persistent identifiers as well
       as the removal of the Subscriber Identifier Context Headers from the NSH
-      by the last SF making use of such headers soften this issue.</t>
+      by the last SF making use of such headers soften this issue (see "data
+      minimization" discussed in Section 3 of <xref
+      target="RFC8165"></xref>)</t>
 
       <t>A misbehaving node from within the SFC-enabled domain may alter the
       content of Subscriber Identifier and Performance Policy Context Headers
@@ -566,8 +577,8 @@
 
       <t>Many thanks to Robert Sparks for the secdir review.</t>
 
-      <t>Thanks to Barry Leiba, Erik Kline, Eric Vyncke, and Robert Wilton for
-      the IESG review. </t>
+      <t>Thanks to Barry Leiba, Erik Kline, Eric Vyncke, Robert Wilton, and
+      Magnus Westerlund for the IESG review.</t>
 
       <t>Special thanks to Benjamin Kaduk for the careful review and
       suggestions that enhanced this specification.</t>
@@ -589,6 +600,8 @@
       <?rfc include='reference.RFC.8371'?>
 
       <?rfc include='reference.RFC.6973'?>
+
+      <?rfc include='reference.RFC.8165'?>
 
       <?rfc include='reference.I-D.ietf-intarea-tunnels'?>
 
