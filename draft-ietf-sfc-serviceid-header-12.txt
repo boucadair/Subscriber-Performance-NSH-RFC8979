@@ -255,13 +255,15 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    performance levels is deployment specific.
 
    The classifier and NSH-aware SFs MAY inject a Subscriber Identifier
-   Context Header as a function of a local policy.  In order to prevent
-   interoperability issues, the type and format of the identifiers to be
-   injected in a Subscriber Identifier Context Header should be
-   configured to nodes authorized to inject and consume such headers.
-   For example, a node can be instructed to insert such data following a
-   type/set scheme (e.g., node X should inject subscriber ID type Y).
-   Other schemes may be envisaged.
+   Context Header as a function of a local policy.  This local policy
+   should indicate the SFP(s) for which the Subscriber Identifier
+   Context Header will be added.  In order to prevent interoperability
+   issues, the type and format of the identifiers to be injected in a
+   Subscriber Identifier Context Header should be configured to nodes
+   authorized to inject and consume such headers.  For example, a node
+   can be instructed to insert such data following a type/set scheme
+   (e.g., node X should inject subscriber ID type Y).  Other schemes may
+   be envisaged.
 
    Failures to inject such headers should be logged locally while a
    notification alarm may be sent to a Control Element.  The details of
@@ -271,9 +273,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    alarms, such as frequency, thresholds, and content of the alarm,
    should be configurable.
 
-   The default behavior of intermediary NSH-aware nodes is to preserve
-   Subscriber Identifier Context Headers (i.e., the information can be
-   passed to next hop NSH-aware nodes), but local policy may require an
+
 
 
 
@@ -282,6 +282,9 @@ Sarikaya, et al.          Expires May 15, 2021                  [Page 5]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+   The default behavior of intermediary NSH-aware nodes is to preserve
+   Subscriber Identifier Context Headers (i.e., the information can be
+   passed to next hop NSH-aware nodes), but local policy may require an
    intermediary NSH-aware node to strip a Subscriber Identifier Context
    Header after processing it.
 
@@ -326,10 +329,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    enabled domain.  They are conveyed in the Performance Policy
    Identifier Context Header.
 
-   The Performance Policy Identifier Context Header is inserted in an
-   NSH packet so that downstream NSH-aware nodes can make use of the
-   performance information for proper distributed SFC path selection, SF
-   instance selection, or policy selection at SFs.  Note that the use of
+
 
 
 
@@ -338,6 +338,10 @@ Sarikaya, et al.          Expires May 15, 2021                  [Page 6]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
+   The Performance Policy Identifier Context Header is inserted in an
+   NSH packet so that downstream NSH-aware nodes can make use of the
+   performance information for proper distributed SFC path selection, SF
+   instance selection, or policy selection at SFs.  Note that the use of
    the Performance Policy Identifier is not helpful if the path
    computation is centralized and a strict SFP is presented as local
    policy to SF Forwarders (SFFs).
@@ -377,10 +381,6 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    detected by an NSH-aware node, the default behavior of the node is to
    discard the packet and send a notification alarm to a Control
    Element.
-
-
-
-
 
 
 
