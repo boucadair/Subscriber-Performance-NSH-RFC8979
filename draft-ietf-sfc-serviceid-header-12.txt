@@ -241,7 +241,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    to enforce per-subscriber policies (e.g., resource quota, customized
    filtering profile, accounting).  To that aim, network operators may
    rely on identifiers that are generated from those used in legacy
-   deployments (e.g., Section 3.3 of[I-D.ietf-sfc-use-case-mobility]).
+   deployments (e.g., Section 3.3 of [I-D.ietf-sfc-use-case-mobility]).
    Alternatively, network operators may use identifiers that are
    associated with customized policy profiles that are preconfigured on
    SFs using an out of band mechanism.  Such mechanism can be used to
@@ -426,8 +426,8 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    As discussed in Section 5.6 of [RFC7665], the SFC architecture
    prescribes that additional information be added to packets to:
 
-   o  Identify SFPs: this is typically the NSH Base (Section 2.2 of
-      [RFC8300]) and Service Path Headers (Section 2.3 of [RFC8300]).
+   o  Identify SFPs: this is typically the NSH Base Header (Section 2.2
+      of [RFC8300]) and Service Path Header (Section 2.3 of [RFC8300]).
 
    o  Carry metadata such those defined in Sections 3 and 4.
 
@@ -481,12 +481,12 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 7.  Security Considerations
 
    Data plane SFC-related security considerations, including privacy,
-   are discussed in Section 6 [RFC7665] and Section 8 of [RFC8300].  In
-   particular, Section 8.2.2 of [RFC8300] states that attached metadata
-   (i.e., Context Headers) should be limited to that necessary for
-   correct operation of the SFP.  That section indicates that metadata
-   considerations that operators can take into account when using NSH
-   are discussed in [RFC8165].
+   are discussed in Section 6 of [RFC7665] and Section 8 of [RFC8300].
+   In particular, Section 8.2.2 of [RFC8300] states that attached
+   metadata (i.e., Context Headers) should be limited to that necessary
+   for correct operation of the SFP.  That section indicates that
+   metadata considerations that operators can take into account when
+   using NSH are discussed in [RFC8165].
 
    As specified in [RFC8300], means to prevent leaking privacy-related
    information outside an SFC-enabled domain are natively supported by

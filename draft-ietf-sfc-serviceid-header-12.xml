@@ -272,18 +272,18 @@
       to enforce per-subscriber policies (e.g., resource quota, customized
       filtering profile, accounting). To that aim, network operators may rely
       on identifiers that are generated from those used in legacy deployments
-      (e.g., Section 3.3 of<xref target="I-D.ietf-sfc-use-case-mobility">
-      </xref>). Alternatively, network operators may use identifiers that are
-      associated with customized policy profiles that are preconfigured on SFs
-      using an out of band mechanism. Such mechanism can be used to rotate the
-      identifiers allowing thus for better unlinkability (Section 3.2 of <xref
-      target="RFC6973"></xref>). Such alternative methods may be suboptimal
-      (e.g., scalability issues induced by maintaining and processing finer
-      granular profiles) or inadequate to provide some per-subscriber
-      policies. The assessment whether a method for defining a subscriber
-      identifier provides the required functionality and that it is compliant
-      with SFs capabilities with the intended performance levels is deployment
-      specific.</t>
+      (e.g., Section 3.3 of <xref
+      target="I-D.ietf-sfc-use-case-mobility"></xref>). Alternatively, network
+      operators may use identifiers that are associated with customized policy
+      profiles that are preconfigured on SFs using an out of band mechanism.
+      Such mechanism can be used to rotate the identifiers allowing thus for
+      better unlinkability (Section 3.2 of <xref target="RFC6973"></xref>).
+      Such alternative methods may be suboptimal (e.g., scalability issues
+      induced by maintaining and processing finer granular profiles) or
+      inadequate to provide some per-subscriber policies. The assessment
+      whether a method for defining a subscriber identifier provides the
+      required functionality and that it is compliant with SFs capabilities
+      with the intended performance levels is deployment specific.</t>
 
       <t>The classifier and NSH-aware SFs MAY inject a Subscriber Identifier
       Context Header as a function of a local policy. In order to prevent
@@ -429,8 +429,8 @@
       <t>As discussed in Section 5.6 of <xref target="RFC7665"></xref>, the
       SFC architecture prescribes that additional information be added to
       packets to: <list style="symbols">
-          <t>Identify SFPs: this is typically the NSH Base (Section 2.2 of
-          <xref target="RFC8300"></xref>) and Service Path Headers (Section
+          <t>Identify SFPs: this is typically the NSH Base Header (Section 2.2
+          of <xref target="RFC8300"></xref>) and Service Path Header (Section
           2.3 of <xref target="RFC8300"></xref>).</t>
 
           <t>Carry metadata such those defined in Sections <xref
@@ -491,13 +491,13 @@
 
     <section anchor="Security" title="Security Considerations">
       <t>Data plane SFC-related security considerations, including privacy,
-      are discussed in Section 6 <xref target="RFC7665"></xref> and Section 8
-      of <xref target="RFC8300"></xref>. In particular, Section 8.2.2 of <xref
-      target="RFC8300"></xref> states that attached metadata (i.e., Context
-      Headers) should be limited to that necessary for correct operation of
-      the SFP. That section indicates that metadata considerations that
-      operators can take into account when using NSH are discussed in <xref
-      target="RFC8165"></xref>.</t>
+      are discussed in Section 6 of <xref target="RFC7665"></xref> and Section
+      8 of <xref target="RFC8300"></xref>. In particular, Section 8.2.2 of
+      <xref target="RFC8300"></xref> states that attached metadata (i.e.,
+      Context Headers) should be limited to that necessary for correct
+      operation of the SFP. That section indicates that metadata
+      considerations that operators can take into account when using NSH are
+      discussed in <xref target="RFC8165"></xref>.</t>
 
       <t>As specified in <xref target="RFC8300"></xref>, means to prevent
       leaking privacy-related information outside an SFC-enabled domain are
