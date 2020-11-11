@@ -197,7 +197,7 @@
       familiar with <xref target="RFC8300"></xref>.</t>
 
       <t>This document assumes the NSH is used exclusively within a single
-      administrative domain. This document follows to the recommendations in
+      administrative domain. This document follows the recommendations in
       <xref target="RFC8300"></xref> for handling the Context Headers at both
       ingress and egress SFC boundary nodes (i.e., to strip the entire NSH,
       including Context Headers). Revealing any subscriber-related information

@@ -157,11 +157,11 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
    [RFC8300].
 
    This document assumes the NSH is used exclusively within a single
-   administrative domain.  This document follows to the recommendations
-   in [RFC8300] for handling the Context Headers at both ingress and
-   egress SFC boundary nodes (i.e., to strip the entire NSH, including
-   Context Headers).  Revealing any subscriber-related information to
-   parties outside the SFC-enabled domain is avoided by design.
+   administrative domain.  This document follows the recommendations in
+   [RFC8300] for handling the Context Headers at both ingress and egress
+   SFC boundary nodes (i.e., to strip the entire NSH, including Context
+   Headers).  Revealing any subscriber-related information to parties
+   outside the SFC-enabled domain is avoided by design.  Accordingly,
 
 
 
@@ -170,11 +170,10 @@ Sarikaya, et al.          Expires May 15, 2021                  [Page 3]
 Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
 
-   Accordingly, the scope for privacy breaches and user tracking is
-   limited to within the SFC-enabled domain where the NSH is used.  It
-   is assumed that appropriate mechanisms to monitor and audit an SFC-
-   enabled domain to detect misbehavior and to deter misuse are in
-   place.
+   the scope for privacy breaches and user tracking is limited to within
+   the SFC-enabled domain where the NSH is used.  It is assumed that
+   appropriate mechanisms to monitor and audit an SFC-enabled domain to
+   detect misbehavior and to deter misuse are in place.
 
    MTU considerations are discussed in Section 5.
 
@@ -218,6 +217,7 @@ Internet-Draft   NSH Subscriber/Performance Policy TLVs    November 2020
 
    o  Length: Indicates the length of the Subscriber Identifier, in
       bytes (see Section 2.5.1 of [RFC8300]).
+
 
 
 
